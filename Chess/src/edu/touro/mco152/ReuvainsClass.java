@@ -1,5 +1,5 @@
 package edu.touro.mco152;
 
-public class RevuainsClass {
+public class ReuvainsClass {
 
 }
