@@ -2,13 +2,38 @@ package edu.touro.mco152;
 
 import java.awt.Point;
 
-public interface ChessPiece {
+public abstract class ChessPiece {
 	public static enum PieceColor {
 		BLACK, WHITE
 	}
 	
-	public PieceColor getColor();
+	protected PieceColor color;
+	protected Point position;
+	protected String pieceLabel = ".";
 	
-	public Point getPosition();
+	public ChessPiece(String pieceLabel){
+		this.pieceLabel = pieceLabel;
+	}
 
+	public PieceColor getColor()
+	{
+		return color;
+	}
+
+	public Point getPosition() 
+	{
+		return position;
+	}
+
+	/**
+	 * Using toString() like this will enable us to easily print the board.
+	 * Each piece will know its color and label and then toString() will print either upper or lowercase
+	 */
+	
+	@Override
+	public String toString() 
+	{
+		return color == PieceColor.WHITE ? pieceLabel.toLowerCase() : pieceLabel.toUpperCase();
+	}
+	
 }
