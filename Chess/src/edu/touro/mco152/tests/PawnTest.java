@@ -1,4 +1,4 @@
-package edu.touro.mco152;
+package edu.touro.mco152.tests;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import edu.touro.mco152.ChessPiece.PieceColor;
+import edu.touro.mco152.Pawn;
 
 public class PawnTest {
 
