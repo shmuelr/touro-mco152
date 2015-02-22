@@ -18,6 +18,9 @@ public class Board {
 		setupBoard();
 	}
 	
+	public int getAmtOfPieces(){
+		return listOfPieces.size();
+	}
 	
 	public void addPieceToBoard(ChessPiece piece)
 	{

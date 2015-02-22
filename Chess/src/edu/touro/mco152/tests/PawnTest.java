@@ -2,6 +2,8 @@ package edu.touro.mco152.tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -40,6 +42,18 @@ public class PawnTest {
 	public void testBlackConstruct() {
 		Pawn blackPawn = new Pawn(PieceColor.BLACK);
 		assertEquals(PieceColor.BLACK, blackPawn.getColor());
+	}
+	
+	@Test
+	public void testCreatePawnWithOutPositon() {
+		Pawn blackPawn = new Pawn(PieceColor.BLACK);
+		assertEquals(-1, blackPawn.getPosition().x);
+	}
+	
+	@Test
+	public void testCreatePawnWithPositon() {
+		Pawn blackPawn = new Pawn(PieceColor.BLACK, new Point(1,1));
+		assertEquals(1, blackPawn.getPosition().x);
 	}
 
 }
