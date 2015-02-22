@@ -1,6 +1,6 @@
 package edu.touro.mco152;
 
-public class Pawn extends ChessPiece   {
+public class Pawn implements ChessPiece   {
 	private PieceColor color;
 	public Pawn() {
 		this.color=PieceColor.WHITE;
@@ -11,6 +11,7 @@ public class Pawn extends ChessPiece   {
 		this.color=color;
 	}
 	
+	@Override
 	public PieceColor getColor()
 	{
 		return color;

@@ -1,8 +1,10 @@
 package edu.touro.mco152;
 
-public class ChessPiece {
+public interface ChessPiece {
 	public static enum PieceColor {
 		BLACK, WHITE
 	}
+	
+	public PieceColor getColor();
 
 }
