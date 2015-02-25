@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edu.touro.mco152.Board;
-import edu.touro.mco152.Pawn;
+import edu.touro.mco152.pieces.Pawn;
 
 public class BoardTest {
 

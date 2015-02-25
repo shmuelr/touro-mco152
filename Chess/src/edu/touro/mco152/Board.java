@@ -5,7 +5,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.touro.mco152.ChessPiece.PieceColor;
+import edu.touro.mco152.pieces.ChessPiece;
+import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
 public class Board {
 

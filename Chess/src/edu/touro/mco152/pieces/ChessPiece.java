@@ -1,4 +1,4 @@
-package edu.touro.mco152;
+package edu.touro.mco152.pieces;
 
 import java.awt.Point;
 

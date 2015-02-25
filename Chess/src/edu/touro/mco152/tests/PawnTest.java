@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import edu.touro.mco152.ChessPiece.PieceColor;
-import edu.touro.mco152.Pawn;
+import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
 public class PawnTest {
 
