@@ -44,16 +44,7 @@ public class PawnTest {
 		assertEquals(PieceColor.BLACK, blackPawn.getColor());
 	}
 	
-	@Test
-	public void testCreatePawnWithOutPositon() {
-		Pawn blackPawn = new Pawn(PieceColor.BLACK);
-		assertEquals(-1, blackPawn.getPosition().x);
-	}
-	
-	@Test
-	public void testCreatePawnWithPositon() {
-		Pawn blackPawn = new Pawn(PieceColor.BLACK, new Point(1,1));
-		assertEquals(1, blackPawn.getPosition().x);
-	}
+
+
 
 }

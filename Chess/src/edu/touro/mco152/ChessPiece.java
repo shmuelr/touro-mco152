@@ -8,7 +8,6 @@ public abstract class ChessPiece {
 	}
 	
 	protected PieceColor color;
-	protected Point position;
 	protected char pieceLabel = '.';
 	
 	public ChessPiece(char pieceLabel){
@@ -20,10 +19,6 @@ public abstract class ChessPiece {
 		return color;
 	}
 
-	public Point getPosition() 
-	{
-		return position;
-	}
 
 	/**
 	 * Using toString() like this will enable us to easily print the board.
