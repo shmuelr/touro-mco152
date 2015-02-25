@@ -1,9 +1,6 @@
 package edu.touro.mco152;
 
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.Pawn;

@@ -2,8 +2,6 @@ package edu.touro.mco152.tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

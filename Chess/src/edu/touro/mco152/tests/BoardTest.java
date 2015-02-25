@@ -55,7 +55,6 @@ public class BoardTest {
 	@Test
 	public void testAddPieceToBoardWithConflict() {
 		Board board = new Board();
-		int boardSize = board.getAmtOfPieces();
 		board.addPieceToBoard(new Pawn(), 'a', 1);
 		assertFalse(board.addPieceToBoard(new Pawn(), 'a', 1));
 	}
