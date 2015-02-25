@@ -10,36 +10,84 @@ import edu.touro.mco152.ChessPiece.PieceColor;
 public class Board {
 
 	private static final int MAX_PIECE_COUNT = 32;
+	private static final int DEFAULT_BOARD_SIZE = 8;
 	
-	List<ChessPiece> listOfPieces = new ArrayList<ChessPiece>(MAX_PIECE_COUNT);
+	private final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
 	
 	public Board() 
 	{
-		setupBoard();
+		
+	}
+	
+	public void setupBoard() 
+	{
+		addPawnsToBoard();
 	}
 	
 	public int getAmtOfPieces(){
-		return listOfPieces.size();
-	}
-	
-	public void addPieceToBoard(ChessPiece piece)
-	{
-		listOfPieces.add(piece);
-	}
-	
-	private void setupBoard() 
-	{
-		addPawns(listOfPieces);
-	}
-	
-	private void addPawns(List<ChessPiece> listOfPieces){
+		int count = 0;
 		
-		for(int i = 0; i < 8; i++){
-			listOfPieces.add(new Pawn(PieceColor.WHITE, new Point(i, 1) ) );
+		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
+				if(pieces[i][j] != null){
+					count++;
+				}
+			}
 		}
 		
-		for(int i = 0; i < 8; i++){
-			listOfPieces.add(new Pawn(PieceColor.BLACK, new Point(i, 6) ) );
+		return count;
+	}
+	
+	// This method allows the user to add a piece to the board using the standard
+	// chess coordinate system (ie a,1  e,3)
+	public boolean addPieceToBoard(ChessPiece piece, char x, int y)
+	{
+		return addPieceToBoard(piece, 
+				Character.toLowerCase(x) - 'a',
+				DEFAULT_BOARD_SIZE - y);
+	}
+	
+	// This method allows the user to add a piece to the board using the standard
+	// chess coordinate system (ie a,1  e,3)
+	public boolean removePieceFromBoard(char x, int y)
+	{
+		return removePieceFromBoard(
+				Character.toLowerCase(x) - 'a',
+				DEFAULT_BOARD_SIZE - y);
+	}
+	
+	// Using XY coordinates is private because the player must use the chess coordinate system
+	private boolean addPieceToBoard(ChessPiece piece, int x, int y)
+	{
+		if(pieces[x][y] == null){
+			pieces[x][y] = piece;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	// Using XY coordinates is private because the player must use the chess coordinate system
+	private boolean removePieceFromBoard(int x, int y)
+	{
+		if(pieces[x][y] != null){
+			pieces[x][y] = null;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
+	
+	private void addPawnsToBoard(){
+		
+		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			pieces[i][1] = new Pawn(PieceColor.WHITE);
+		}
+		
+		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			pieces[i][6] = new Pawn(PieceColor.BLACK);
 		}
 			
 	}
@@ -51,22 +99,20 @@ public class Board {
 		
 		stringBuilder.append("Printing complete board:\n");
 		stringBuilder.append("  abcdefgh\n");
-		boolean isPieceHere = false;
-		for(int i = 0; i < 8; i++){
-			stringBuilder.append(i+1);
+
+		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			stringBuilder.append(DEFAULT_BOARD_SIZE - i);
 			stringBuilder.append(" ");
-			for(int j = 0; j< 8; j++){
-				for(ChessPiece piece : listOfPieces){
-					if(piece.getPosition().x == j && piece.getPosition().y == i){
-						isPieceHere = true;
-						stringBuilder.append(piece.toString());
-					}
-				}
+			
+			for(int j = 0; j< DEFAULT_BOARD_SIZE; j++){
 				
-				if(!isPieceHere){
+				// I'm not sure why I have to reverse i and j to get it to print out correctly
+				// Need to investigate
+				if(pieces[j][i]!=null){
+					stringBuilder.append(pieces[j][i].toString());
+				}else{
 					stringBuilder.append('.');
 				}
-				isPieceHere = false;
 				
 			}
 			stringBuilder.append("\n");
