@@ -9,9 +9,9 @@ public abstract class ChessPiece {
 	
 	protected PieceColor color;
 	protected Point position;
-	protected String pieceLabel = ".";
+	protected char pieceLabel = '.';
 	
-	public ChessPiece(String pieceLabel){
+	public ChessPiece(char pieceLabel){
 		this.pieceLabel = pieceLabel;
 	}
 
@@ -33,7 +33,9 @@ public abstract class ChessPiece {
 	@Override
 	public String toString() 
 	{
-		return color == PieceColor.WHITE ? pieceLabel.toLowerCase() : pieceLabel.toUpperCase();
+		return color == PieceColor.WHITE ? 
+				Character.toString(Character.toLowerCase(pieceLabel)) : 
+					Character.toString(Character.toUpperCase(pieceLabel));
 	}
 	
 }
