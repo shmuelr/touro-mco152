@@ -13,6 +13,8 @@ public class Board {
 	
 	private final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
 	
+	
+	
 	public Board() 
 	{
 		
@@ -81,12 +83,13 @@ public class Board {
 	
 	private void addPawnsToBoard(){
 		
-		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			pieces[i][1] = new Pawn(PieceColor.WHITE);
+		
+		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
+			pieces[x][1] = new Pawn(PieceColor.WHITE);
 		}
 		
-		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			pieces[i][6] = new Pawn(PieceColor.BLACK);
+		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
+			pieces[x][6] = new Pawn(PieceColor.BLACK);
 		}
 			
 	}
@@ -99,16 +102,14 @@ public class Board {
 		stringBuilder.append("Printing complete board:\n");
 		stringBuilder.append("  abcdefgh\n");
 
-		for(int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			stringBuilder.append(DEFAULT_BOARD_SIZE - i);
+		for(int y = 0; y < DEFAULT_BOARD_SIZE; y++){
+			stringBuilder.append(DEFAULT_BOARD_SIZE - y);
 			stringBuilder.append(" ");
 			
-			for(int j = 0; j< DEFAULT_BOARD_SIZE; j++){
+			for(int x = 0; x< DEFAULT_BOARD_SIZE; x++){
 				
-				// I'm not sure why I have to reverse i and j to get it to print out correctly
-				// Need to investigate
-				if(pieces[j][i]!=null){
-					stringBuilder.append(pieces[j][i].toString());
+				if(pieces[x][y]!=null){
+					stringBuilder.append(pieces[x][y].toString());
 				}else{
 					stringBuilder.append('.');
 				}
