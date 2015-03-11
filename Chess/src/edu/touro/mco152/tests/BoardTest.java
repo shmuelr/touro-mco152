@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edu.touro.mco152.Board;
-import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.ChessPiece;
 
 public class BoardTest {
 
@@ -26,7 +26,7 @@ public class BoardTest {
 	public void testSizeCountWhenAddPieceToBoard() {
 		Board board = new Board();
 		int boardSize = board.getAmtOfPieces();
-		board.addPieceToBoard(new Pawn(), 'a', 1);
+		board.addPieceToBoard(ChessPiece.getBlackPawn(), 'a', 1);
 		assertEquals(boardSize+1, board.getAmtOfPieces());
 	}
 	
@@ -34,7 +34,7 @@ public class BoardTest {
 	public void testBoardPrintWhenAddPieceToBoard() {
 		Board board = new Board();
 		
-		board.addPieceToBoard(new Pawn(), 'a', 1);
+		board.addPieceToBoard(ChessPiece.getBlackPawn(), 'a', 2);
 		
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
@@ -46,8 +46,8 @@ public class BoardTest {
 				+ "5 ........\n"
 				+ "4 ........\n"
 				+ "3 ........\n"
-				+ "2 ........\n"
-				+ "1 p.......\n";
+				+ "2 p.......\n"
+				+ "1 ........\n";
 		System.out.println(boardPrintOut);
 		assertTrue(boardPrintOut.equals(excpectedOutPut));
 	}
@@ -55,14 +55,14 @@ public class BoardTest {
 	@Test
 	public void testAddPieceToBoardWithConflict() {
 		Board board = new Board();
-		board.addPieceToBoard(new Pawn(), 'a', 1);
-		assertFalse(board.addPieceToBoard(new Pawn(), 'a', 1));
+		board.addPieceToBoard(ChessPiece.getBlackPawn(), 'a', 1);
+		assertFalse(board.addPieceToBoard(ChessPiece.getBlackPawn(), 'a', 1));
 	}
 	
 	@Test
 	public void testRemovePieceFromBoard() {
 		Board board = new Board();
-		board.addPieceToBoard(new Pawn(), 'a', 1);
+		board.addPieceToBoard(ChessPiece.getBlackPawn(), 'a', 1);
 		assertTrue(board.removePieceFromBoard('a', 1));
 	}
 	

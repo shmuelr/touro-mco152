@@ -1,18 +1,77 @@
 package edu.touro.mco152.pieces;
 
 
-public abstract class ChessPiece {
+public class ChessPiece {
 	public static enum PieceColor {
 		BLACK, WHITE
 	}
 	
-	protected PieceColor color;
-	protected char pieceLabel = '.';
+	protected final PieceColor color;
+	protected final char pieceLabel;
 	
-	public ChessPiece(char pieceLabel){
+	public ChessPiece(char pieceLabel, PieceColor color){
 		this.pieceLabel = pieceLabel;
+		this.color = color;
 	}
 
+	
+	public static ChessPiece getBlackPawn(){
+		ChessPiece blackPawn = new ChessPiece('P', PieceColor.BLACK);
+		return blackPawn;
+	}
+	
+	public static ChessPiece getBlackKnight(){
+		ChessPiece whitePawn = new ChessPiece('N', PieceColor.BLACK);
+		return whitePawn;
+	}
+	public static ChessPiece getBlackBishop(){
+		ChessPiece whitePawn = new ChessPiece('B', PieceColor.BLACK);
+		return whitePawn;
+	}
+	public static ChessPiece getBlackRook(){
+		ChessPiece whitePawn = new ChessPiece('R', PieceColor.BLACK);
+		return whitePawn;
+	}
+	public static ChessPiece getBlackKing(){
+		ChessPiece whitePawn = new ChessPiece('K', PieceColor.BLACK);
+		return whitePawn;
+	}
+	public static ChessPiece getBlackQueen(){
+		ChessPiece whitePawn = new ChessPiece('Q', PieceColor.BLACK);
+		return whitePawn;
+	}
+	
+	
+	
+	
+	public static ChessPiece getWhitePawn(){
+		ChessPiece whitePawn = new ChessPiece('P', PieceColor.WHITE);
+		return whitePawn;
+	}
+	
+	public static ChessPiece getWhiteKnight(){
+		ChessPiece whitePawn = new ChessPiece('N', PieceColor.WHITE);
+		return whitePawn;
+	}
+	public static ChessPiece getWhiteBishop(){
+		ChessPiece whitePawn = new ChessPiece('B', PieceColor.WHITE);
+		return whitePawn;
+	}
+	public static ChessPiece getWhiteRook(){
+		ChessPiece whitePawn = new ChessPiece('R', PieceColor.WHITE);
+		return whitePawn;
+	}
+	public static ChessPiece getWhiteKing(){
+		ChessPiece whitePawn = new ChessPiece('K', PieceColor.WHITE);
+		return whitePawn;
+	}
+	public static ChessPiece getWhiteQueen(){
+		ChessPiece whitePawn = new ChessPiece('Q', PieceColor.WHITE);
+		return whitePawn;
+	}
+	
+	
+	
 	public PieceColor getColor()
 	{
 		return color;

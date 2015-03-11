@@ -3,7 +3,6 @@ package edu.touro.mco152;
 
 
 import edu.touro.mco152.pieces.ChessPiece;
-import edu.touro.mco152.pieces.Pawn;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
 public class Board {
@@ -85,11 +84,11 @@ public class Board {
 		
 		
 		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][1] = new Pawn(PieceColor.WHITE);
+			pieces[x][1] = ChessPiece.getWhitePawn();
 		}
 		
 		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][6] = new Pawn(PieceColor.BLACK);
+			pieces[x][6] = ChessPiece.getBlackPawn();
 		}
 			
 	}

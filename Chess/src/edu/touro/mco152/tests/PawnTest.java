@@ -8,7 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.ChessPiece;
+
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
 public class PawnTest {
@@ -32,14 +33,14 @@ public class PawnTest {
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
-		Pawn p= new Pawn();
+		ChessPiece p = ChessPiece.getWhitePawn();
 		assertEquals(PieceColor.WHITE,p.getColor());
 	}
 	
 	@Test
 	public void testBlackConstruct() {
-		Pawn blackPawn = new Pawn(PieceColor.BLACK);
-		assertEquals(PieceColor.BLACK, blackPawn.getColor());
+		ChessPiece p = ChessPiece.getBlackPawn();
+		assertEquals(PieceColor.BLACK, p.getColor());
 	}
 	
 
