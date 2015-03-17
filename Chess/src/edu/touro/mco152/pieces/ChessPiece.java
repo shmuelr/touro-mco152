@@ -87,8 +87,8 @@ public class ChessPiece {
 	public String toString() 
 	{
 		return color == PieceColor.WHITE ? 
-				Character.toString(Character.toLowerCase(pieceLabel)) : 
-					Character.toString(Character.toUpperCase(pieceLabel));
+				Character.toString(Character.toUpperCase(pieceLabel)) : 
+					Character.toString(Character.toLowerCase(pieceLabel));
 	}
 	
 }

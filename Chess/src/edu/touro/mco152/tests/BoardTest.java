@@ -19,7 +19,7 @@ public class BoardTest {
 	public void testBoardSize() {
 		Board board = new Board();
 		board.setupBoard();
-		assertEquals(16, board.getAmtOfPieces());
+		assertEquals(32, board.getAmtOfPieces());
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class BoardTest {
 				+ "3 ........\n"
 				+ "2 p.......\n"
 				+ "1 ........\n";
-		System.out.println(boardPrintOut);
+		
 		assertTrue(boardPrintOut.equals(excpectedOutPut));
 	}
 	
@@ -80,15 +80,15 @@ public class BoardTest {
 		String excpectedOutPut = 
 				"Printing complete board:\n"
 				+ "  abcdefgh\n"
-				+ "8 ........\n"
+				+ "8 rnbqkbnr\n"
 				+ "7 pppppppp\n"
 				+ "6 ........\n"
 				+ "5 ........\n"
 				+ "4 ........\n"
 				+ "3 ........\n"
 				+ "2 PPPPPPPP\n"
-				+ "1 ........\n";
-		
+				+ "1 RNBQKBNR\n";
+		System.out.println(boardPrintOut);
 		assertTrue(boardPrintOut.equals(excpectedOutPut));
 	}
 

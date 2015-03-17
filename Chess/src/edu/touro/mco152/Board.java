@@ -22,7 +22,59 @@ public class Board {
 	public void setupBoard() 
 	{
 		addPawnsToBoard();
+		addRooksToBoard();
+		addKnitesToBoard();
+		addBishopsToBoard();
+		addQueensToBoard();
+		addKingsToBoard();
 	}
+	
+	private void addKingsToBoard() {
+		addPieceToBoard(ChessPiece.getBlackKing(), 'e', 8);
+		addPieceToBoard(ChessPiece.getWhiteKing(), 'e', 1);
+	}
+
+	private void addQueensToBoard() {
+		addPieceToBoard(ChessPiece.getBlackQueen(), 'd', 8);
+		addPieceToBoard(ChessPiece.getWhiteQueen(), 'd', 1);
+	}
+
+	private void addBishopsToBoard() {
+		addPieceToBoard(ChessPiece.getBlackBishop(), 'c', 8);
+		addPieceToBoard(ChessPiece.getBlackBishop(), 'f', 8);
+		addPieceToBoard(ChessPiece.getWhiteBishop(), 'c', 1);
+		addPieceToBoard(ChessPiece.getWhiteBishop(), 'f', 1);
+	}
+
+	private void addKnitesToBoard() {
+		addPieceToBoard(ChessPiece.getBlackKnight(), 'b', 8);
+		addPieceToBoard(ChessPiece.getBlackKnight(), 'g', 8);
+		addPieceToBoard(ChessPiece.getWhiteKnight(), 'b', 1);
+		addPieceToBoard(ChessPiece.getWhiteKnight(), 'g', 1);
+	}
+
+	private void addRooksToBoard() {
+		addPieceToBoard(ChessPiece.getBlackRook(), 'a', 8);
+		addPieceToBoard(ChessPiece.getBlackRook(), 'h', 8);
+		addPieceToBoard(ChessPiece.getWhiteRook(), 'a', 1);
+		addPieceToBoard(ChessPiece.getWhiteRook(), 'h', 1);
+	}
+
+	private void addPawnsToBoard(){
+		
+		
+		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
+			pieces[x][1] = ChessPiece.getBlackPawn();
+		}
+		
+		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
+			pieces[x][6] = ChessPiece.getWhitePawn();
+		}
+			
+	}
+	
+	
+	
 	
 	public int getAmtOfPieces(){
 		int count = 0;
@@ -80,18 +132,6 @@ public class Board {
 	
 	
 	
-	private void addPawnsToBoard(){
-		
-		
-		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][1] = ChessPiece.getWhitePawn();
-		}
-		
-		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][6] = ChessPiece.getBlackPawn();
-		}
-			
-	}
 	
 	
 	public String printBoard() {
