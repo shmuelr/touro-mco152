@@ -14,35 +14,38 @@ public class ChessPiece {
 		this.color = color;
 	}
 
-	
+	/**
+	 * creates black pieces
+	 */
 	public static ChessPiece getBlackPawn(){
 		ChessPiece blackPawn = new ChessPiece('P', PieceColor.BLACK);
 		return blackPawn;
 	}
 	
 	public static ChessPiece getBlackKnight(){
-		ChessPiece whitePawn = new ChessPiece('N', PieceColor.BLACK);
-		return whitePawn;
+		ChessPiece blackKnight = new ChessPiece('N', PieceColor.BLACK);
+		return blackKnight;
 	}
 	public static ChessPiece getBlackBishop(){
-		ChessPiece whitePawn = new ChessPiece('B', PieceColor.BLACK);
-		return whitePawn;
+		ChessPiece blackBishop = new ChessPiece('B', PieceColor.BLACK);
+		return blackBishop;
 	}
 	public static ChessPiece getBlackRook(){
-		ChessPiece whitePawn = new ChessPiece('R', PieceColor.BLACK);
-		return whitePawn;
+		ChessPiece blackRook = new ChessPiece('R', PieceColor.BLACK);
+		return blackRook;
 	}
 	public static ChessPiece getBlackKing(){
-		ChessPiece whitePawn = new ChessPiece('K', PieceColor.BLACK);
-		return whitePawn;
+		ChessPiece blackKing = new ChessPiece('K', PieceColor.BLACK);
+		return blackKing;
 	}
 	public static ChessPiece getBlackQueen(){
-		ChessPiece whitePawn = new ChessPiece('Q', PieceColor.BLACK);
-		return whitePawn;
+		ChessPiece blackQueen = new ChessPiece('Q', PieceColor.BLACK);
+		return blackQueen;
 	}
 	
-	
-	
+	/**
+	 * creates white pieces
+	 */
 	
 	public static ChessPiece getWhitePawn(){
 		ChessPiece whitePawn = new ChessPiece('P', PieceColor.WHITE);
@@ -50,24 +53,24 @@ public class ChessPiece {
 	}
 	
 	public static ChessPiece getWhiteKnight(){
-		ChessPiece whitePawn = new ChessPiece('N', PieceColor.WHITE);
-		return whitePawn;
+		ChessPiece whiteKnight = new ChessPiece('N', PieceColor.WHITE);
+		return whiteKnight;
 	}
 	public static ChessPiece getWhiteBishop(){
-		ChessPiece whitePawn = new ChessPiece('B', PieceColor.WHITE);
-		return whitePawn;
+		ChessPiece whiteBishop = new ChessPiece('B', PieceColor.WHITE);
+		return whiteBishop;
 	}
 	public static ChessPiece getWhiteRook(){
-		ChessPiece whitePawn = new ChessPiece('R', PieceColor.WHITE);
-		return whitePawn;
+		ChessPiece whiteRook = new ChessPiece('R', PieceColor.WHITE);
+		return whiteRook;
 	}
 	public static ChessPiece getWhiteKing(){
-		ChessPiece whitePawn = new ChessPiece('K', PieceColor.WHITE);
-		return whitePawn;
+		ChessPiece whiteKing = new ChessPiece('K', PieceColor.WHITE);
+		return whiteKing;
 	}
 	public static ChessPiece getWhiteQueen(){
-		ChessPiece whitePawn = new ChessPiece('Q', PieceColor.WHITE);
-		return whitePawn;
+		ChessPiece whiteQueen = new ChessPiece('Q', PieceColor.WHITE);
+		return whiteQueen;
 	}
 	
 	
