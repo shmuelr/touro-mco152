@@ -138,7 +138,6 @@ public class Board {
 		
 		StringBuilder stringBuilder = new StringBuilder();
 		
-		stringBuilder.append("Printing complete board:\n");
 		stringBuilder.append("  abcdefgh\n");
 
 		for(int y = 0; y < DEFAULT_BOARD_SIZE; y++){
