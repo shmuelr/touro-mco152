@@ -34,13 +34,13 @@ public class PawnTest {
 	public void test() {
 		//fail("Not yet implemented");
 		ChessPiece p = ChessPiece.getWhitePawn();
-		assertEquals(PieceColor.WHITE,p.getColor());
+		assertTrue(p.isWhite());
 	}
 	
 	@Test
 	public void testBlackConstruct() {
 		ChessPiece p = ChessPiece.getBlackPawn();
-		assertEquals(PieceColor.BLACK, p.getColor());
+		assertTrue(p.isBlack());
 	}
 	
 

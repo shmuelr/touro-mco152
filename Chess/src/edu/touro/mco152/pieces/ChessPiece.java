@@ -72,11 +72,19 @@ public class ChessPiece {
 	
 	
 	
-	public PieceColor getColor()
+	private PieceColor getColor()
 	{
 		return color;
 	}
 
+	public boolean isWhite(){
+		return color == PieceColor.WHITE;
+	}
+	
+	public boolean isBlack(){
+		return color == PieceColor.BLACK;
+	}
+	
 
 	/**
 	 * Using toString() like this will enable us to easily print the board.
@@ -86,7 +94,7 @@ public class ChessPiece {
 	@Override
 	public String toString() 
 	{
-		return color == PieceColor.WHITE ? 
+		return isWhite() ? 
 				Character.toString(Character.toUpperCase(pieceLabel)) : 
 					Character.toString(Character.toLowerCase(pieceLabel));
 	}
