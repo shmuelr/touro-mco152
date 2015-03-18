@@ -93,6 +93,34 @@ public class Board {
 		return count;
 	}
 	
+	public int getAmtOfBlackPieces(){
+		int blackCount = 0;
+		
+		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
+				if(pieces[i][j] != null && pieces[i][j].isBlack()){
+					blackCount++;
+				}
+			}
+		}
+		
+		return blackCount;
+	}
+	
+	public int getAmtOfWhitePieces(){
+		int whiteCount = 0;
+		
+		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
+				if(pieces[i][j] != null && pieces[i][j].isWhite()){
+					whiteCount++;
+				}
+			}
+		}
+		
+		return whiteCount;
+	}
+	
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
 		System.out.println(x1+" "+y1);

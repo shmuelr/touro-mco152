@@ -31,6 +31,21 @@ public class BoardTest {
 	}
 	
 	@Test
+	public void testCountTotalBlackPieces(){
+		Board board = new Board();
+		board.setupBoard();
+		assertEquals(16, board.getAmtOfBlackPieces());
+	}
+	
+	@Test
+	public void testCountTotalWhitePieces(){
+		Board board = new Board();
+		board.setupBoard();
+		assertEquals(16, board.getAmtOfWhitePieces());
+	}
+	
+	
+	@Test
 	public void testBoardPrintWhenAddPieceToBoard() {
 		Board board = new Board();
 		
