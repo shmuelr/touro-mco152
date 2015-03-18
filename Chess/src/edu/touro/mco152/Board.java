@@ -12,7 +12,10 @@ public class Board {
 	
 	private final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
 	
-	
+	public static final int SUCCESS = 1;
+	public static final int ERROR_NO_SOURCE_PIECE = -1;
+	public static final int ERROR_NO_DESTINATION_PIECE = -2;
+	public static final int ERROR_PIECE_IN_DESTINATION = -3;
 	
 	public Board() 
 	{
@@ -88,6 +91,32 @@ public class Board {
 		}
 		
 		return count;
+	}
+	
+	
+	public int movePiece(char x1, int y1, char x2, int y2){
+		System.out.println(x1+" "+y1);
+		System.out.println(x2+" "+y2);
+		
+		return movePiece(
+				Character.toLowerCase(x1) - 'a',
+				DEFAULT_BOARD_SIZE - y1,
+				Character.toLowerCase(x2) - 'a',
+				DEFAULT_BOARD_SIZE - y2);
+	}
+	
+	
+	private int movePiece(int x1, int y1, int x2, int y2){
+		System.out.println(x1+" "+y1);
+		System.out.println(x2+" "+y2);
+		
+		if(pieces[x1][y1] == null) return ERROR_NO_SOURCE_PIECE;
+		if(pieces[x2][y2] != null) return ERROR_PIECE_IN_DESTINATION;
+		
+		pieces[x2][y2] = pieces[x1][y1];
+		pieces[x1][y1] = null;
+		
+		return SUCCESS;
 	}
 	
 	// This method allows the user to add a piece to the board using the standard

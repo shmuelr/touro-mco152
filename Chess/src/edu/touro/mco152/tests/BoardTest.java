@@ -38,8 +38,7 @@ public class BoardTest {
 		
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
-				"Printing complete board:\n"
-				+ "  abcdefgh\n"
+				"  abcdefgh\n"
 				+ "8 ........\n"
 				+ "7 ........\n"
 				+ "6 ........\n"
@@ -78,8 +77,7 @@ public class BoardTest {
 		board.setupBoard();
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
-				"Printing complete board:\n"
-				+ "  abcdefgh\n"
+				"  abcdefgh\n"
 				+ "8 rnbqkbnr\n"
 				+ "7 pppppppp\n"
 				+ "6 ........\n"
