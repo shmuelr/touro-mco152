@@ -4,76 +4,30 @@ package edu.touro.mco152.pieces;
 public class ChessPiece {
 	public static enum PieceColor {
 		BLACK, WHITE
+		}
+			public static enum Type{
+			PAWN('P'), KNIGHT('N'), BISHOP('B'), ROOK('R'), KING('K'), QUEEN('Q');
+			char representation;
+			Type(char representation){
+			this.representation = representation;
+		}
 	}
 	
 	protected final PieceColor color;
-	protected final char pieceLabel;
+	 private Type type;
 	
-	public ChessPiece(char pieceLabel, PieceColor color){
-		this.pieceLabel = pieceLabel;
+	
+	public ChessPiece(Type type, PieceColor color){
+		this.type = type;
 		this.color = color;
-	}
+		}
+	 public static ChessPiece getPiece(Type type, PieceColor color){
+		 return new ChessPiece(type, color);
+		 }
 
 	/**
 	 * creates black pieces
 	 */
-	public static ChessPiece getBlackPawn(){
-		ChessPiece blackPawn = new ChessPiece('P', PieceColor.BLACK);
-		return blackPawn;
-	}
-	
-	public static ChessPiece getBlackKnight(){
-		ChessPiece blackKnight = new ChessPiece('N', PieceColor.BLACK);
-		return blackKnight;
-	}
-	public static ChessPiece getBlackBishop(){
-		ChessPiece blackBishop = new ChessPiece('B', PieceColor.BLACK);
-		return blackBishop;
-	}
-	public static ChessPiece getBlackRook(){
-		ChessPiece blackRook = new ChessPiece('R', PieceColor.BLACK);
-		return blackRook;
-	}
-	public static ChessPiece getBlackKing(){
-		ChessPiece blackKing = new ChessPiece('K', PieceColor.BLACK);
-		return blackKing;
-	}
-	public static ChessPiece getBlackQueen(){
-		ChessPiece blackQueen = new ChessPiece('Q', PieceColor.BLACK);
-		return blackQueen;
-	}
-	
-	/**
-	 * creates white pieces
-	 */
-	
-	public static ChessPiece getWhitePawn(){
-		ChessPiece whitePawn = new ChessPiece('P', PieceColor.WHITE);
-		return whitePawn;
-	}
-	
-	public static ChessPiece getWhiteKnight(){
-		ChessPiece whiteKnight = new ChessPiece('N', PieceColor.WHITE);
-		return whiteKnight;
-	}
-	public static ChessPiece getWhiteBishop(){
-		ChessPiece whiteBishop = new ChessPiece('B', PieceColor.WHITE);
-		return whiteBishop;
-	}
-	public static ChessPiece getWhiteRook(){
-		ChessPiece whiteRook = new ChessPiece('R', PieceColor.WHITE);
-		return whiteRook;
-	}
-	public static ChessPiece getWhiteKing(){
-		ChessPiece whiteKing = new ChessPiece('K', PieceColor.WHITE);
-		return whiteKing;
-	}
-	public static ChessPiece getWhiteQueen(){
-		ChessPiece whiteQueen = new ChessPiece('Q', PieceColor.WHITE);
-		return whiteQueen;
-	}
-	
-	
 	
 	private PieceColor getColor()
 	{
@@ -98,8 +52,8 @@ public class ChessPiece {
 	public String toString() 
 	{
 		return isWhite() ? 
-				Character.toString(Character.toUpperCase(pieceLabel)) : 
-					Character.toString(Character.toLowerCase(pieceLabel));
+				Character.toString(Character.toUpperCase(type.representation)) : 
+					Character.toString(Character.toLowerCase(type.representation));
 	}
 	
 }

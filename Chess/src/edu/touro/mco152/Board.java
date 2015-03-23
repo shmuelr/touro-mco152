@@ -4,6 +4,7 @@ package edu.touro.mco152;
 
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
+import edu.touro.mco152.pieces.ChessPiece.Type;
 
 public class Board {
 
@@ -21,63 +22,43 @@ public class Board {
 	{
 		
 	}
-	
-	public void setupBoard() 
+	public void setupBoard()
 	{
-		addPawnsToBoard();
-		addRooksToBoard();
-		addKnitesToBoard();
-		addBishopsToBoard();
-		addQueensToBoard();
-		addKingsToBoard();
+		setUpBoard("RNBQKBNR"+
+			"PPPPPPPP"+
+			"........"+
+			"........"+
+			"........"+
+			"........"+
+			"pppppppp"+
+			"rnbqkbnr");
 	}
 	
-	private void addKingsToBoard() {
-		addPieceToBoard(ChessPiece.getBlackKing(), 'e', 8);
-		addPieceToBoard(ChessPiece.getWhiteKing(), 'e', 1);
+	public void setUpBoard(String s) {
+		int length = s.length()-1;
+		for (int i=0;i< DEFAULT_BOARD_SIZE;i++)
+		for (int j=DEFAULT_BOARD_SIZE-1;j>=0;j--)
+		pieces[j][i]= generatePiece(s.charAt(length--));
 	}
-
-	private void addQueensToBoard() {
-		addPieceToBoard(ChessPiece.getBlackQueen(), 'd', 8);
-		addPieceToBoard(ChessPiece.getWhiteQueen(), 'd', 1);
-	}
-
-	private void addBishopsToBoard() {
-		addPieceToBoard(ChessPiece.getBlackBishop(), 'c', 8);
-		addPieceToBoard(ChessPiece.getBlackBishop(), 'f', 8);
-		addPieceToBoard(ChessPiece.getWhiteBishop(), 'c', 1);
-		addPieceToBoard(ChessPiece.getWhiteBishop(), 'f', 1);
-	}
-
-	private void addKnitesToBoard() {
-		addPieceToBoard(ChessPiece.getBlackKnight(), 'b', 8);
-		addPieceToBoard(ChessPiece.getBlackKnight(), 'g', 8);
-		addPieceToBoard(ChessPiece.getWhiteKnight(), 'b', 1);
-		addPieceToBoard(ChessPiece.getWhiteKnight(), 'g', 1);
-	}
-
-	private void addRooksToBoard() {
-		addPieceToBoard(ChessPiece.getBlackRook(), 'a', 8);
-		addPieceToBoard(ChessPiece.getBlackRook(), 'h', 8);
-		addPieceToBoard(ChessPiece.getWhiteRook(), 'a', 1);
-		addPieceToBoard(ChessPiece.getWhiteRook(), 'h', 1);
-	}
-
-	private void addPawnsToBoard(){
+	
+	public ChessPiece generatePiece(char c) {
 		
-		
-		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][1] = ChessPiece.getBlackPawn();
+		switch(c) {
+			case 'P': return ChessPiece.getPiece(Type.PAWN,PieceColor.WHITE);
+			case 'p': return ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK);
+			case 'R': return ChessPiece.getPiece(Type.ROOK,PieceColor.WHITE);
+			case 'r': return ChessPiece.getPiece(Type.ROOK,PieceColor.BLACK);
+			case 'N': return ChessPiece.getPiece(Type.KNIGHT,PieceColor.WHITE);
+			case 'n': return ChessPiece.getPiece(Type.KNIGHT,PieceColor.BLACK);
+			case 'B': return ChessPiece.getPiece(Type.BISHOP,PieceColor.WHITE);
+			case 'b': return ChessPiece.getPiece(Type.BISHOP,PieceColor.BLACK);
+			case 'K': return ChessPiece.getPiece(Type.KING,PieceColor.WHITE);
+			case 'k': return ChessPiece.getPiece(Type.KING,PieceColor.BLACK);
+			case 'Q': return ChessPiece.getPiece(Type.QUEEN,PieceColor.WHITE);
+			case 'q': return ChessPiece.getPiece(Type.QUEEN,PieceColor.BLACK);
+			default: return null;
 		}
-		
-		for(int x = 0; x < DEFAULT_BOARD_SIZE; x++){
-			pieces[x][6] = ChessPiece.getWhitePawn();
-		}
-			
 	}
-	
-	
-	
 	
 	public int getAmtOfPieces(){
 		int count = 0;
