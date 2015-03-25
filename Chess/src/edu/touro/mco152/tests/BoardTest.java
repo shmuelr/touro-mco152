@@ -36,14 +36,22 @@ public class BoardTest {
 	public void testCountTotalBlackPieces(){
 		Board board = new Board();
 		board.setupBoard();
-		assertEquals(16, board.getAmtOfBlackPieces());
+		assertEquals(16, board.getAmtOfPiecesByColor(PieceColor.BLACK));
 	}
 	
 	@Test
 	public void testCountTotalWhitePieces(){
 		Board board = new Board();
 		board.setupBoard();
-		assertEquals(16, board.getAmtOfWhitePieces());
+		assertEquals(16, board.getAmtOfPiecesByColor(PieceColor.WHITE));
+	}
+	
+	
+	@Test
+	public void testCountSpecificPieces(){
+		Board board = new Board();
+		board.setupBoard();
+		assertEquals(2, board.getAmtOfSpecificPiece(ChessPiece.getPiece(Type.BISHOP, PieceColor.BLACK)));
 	}
 	
 	

@@ -56,4 +56,12 @@ public class ChessPiece {
 					Character.toString(Character.toLowerCase(type.representation));
 	}
 	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ChessPiece){
+			return obj.toString().equals(this.toString());
+		}
+		return false;
+	}
 }

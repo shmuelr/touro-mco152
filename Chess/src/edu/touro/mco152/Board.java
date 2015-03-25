@@ -2,6 +2,9 @@ package edu.touro.mco152;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 import edu.touro.mco152.pieces.ChessPiece.Type;
@@ -60,47 +63,45 @@ public class Board {
 		}
 	}
 	
-	public int getAmtOfPieces(){
-		int count = 0;
+	private List<ChessPiece> getListOfPieces(){
+		List<ChessPiece> chessPieces = new ArrayList<>(MAX_PIECE_COUNT);
 		
 		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
 			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
 				if(pieces[i][j] != null){
-					count++;
+					chessPieces.add(pieces[i][j]);
 				}
 			}
 		}
 		
+		return chessPieces;
+	}
+	
+	public int getAmtOfPieces(){
+		return getListOfPieces().size();
+	}
+	
+	public int getAmtOfPiecesByColor(PieceColor color){
+		int count = 0;
+		for (ChessPiece piece : getListOfPieces()){
+			if (piece.getColor() == color){
+				count++;
+			}
+		}
 		return count;
 	}
 	
-	public int getAmtOfBlackPieces(){
-		int blackCount = 0;
-		
-		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
-				if(pieces[i][j] != null && pieces[i][j].isBlack()){
-					blackCount++;
-				}
+	public int getAmtOfSpecificPiece(ChessPiece chessPiece){
+		int count = 0;
+		for (ChessPiece piece : getListOfPieces()){
+			if (piece.equals(chessPiece)){
+				count++;
 			}
 		}
-		
-		return blackCount;
+		return count;
 	}
+
 	
-	public int getAmtOfWhitePieces(){
-		int whiteCount = 0;
-		
-		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
-				if(pieces[i][j] != null && pieces[i][j].isWhite()){
-					whiteCount++;
-				}
-			}
-		}
-		
-		return whiteCount;
-	}
 	
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
