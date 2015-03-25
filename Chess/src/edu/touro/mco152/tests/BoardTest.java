@@ -54,6 +54,13 @@ public class BoardTest {
 		assertEquals(2, board.getAmtOfSpecificPiece(ChessPiece.getPiece(Type.BISHOP, PieceColor.BLACK)));
 	}
 	
+	@Test
+	public void testGetPiece(){
+		Board board = new Board();
+		board.setupBoard();
+
+		assertEquals(ChessPiece.getPiece(Type.BISHOP, PieceColor.BLACK), board.getPiece('c', 8));
+	}
 	
 	@Test
 	public void testBoardPrintWhenAddPieceToBoard() {
@@ -102,7 +109,7 @@ public class BoardTest {
 		board.setupBoard();
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
-				"  abcdefgh\n"
+				  "  abcdefgh\n"
 				+ "8 rnbqkbnr\n"
 				+ "7 pppppppp\n"
 				+ "6 ........\n"

@@ -101,8 +101,16 @@ public class Board {
 		return count;
 	}
 
+	public ChessPiece getPiece(char x, int y)
+	{
+		return getPiece(Character.toLowerCase(x) - 'a',
+				DEFAULT_BOARD_SIZE - y);
+	}
 	
-	
+	private ChessPiece getPiece(int x, int y)
+	{
+		return pieces[x][y];
+	}
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
 		System.out.println(x1+" "+y1);
