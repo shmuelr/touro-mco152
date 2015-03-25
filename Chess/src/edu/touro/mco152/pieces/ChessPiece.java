@@ -29,7 +29,7 @@ public class ChessPiece {
 	 * creates black pieces
 	 */
 	
-	private PieceColor getColor()
+	public PieceColor getColor()
 	{
 		return color;
 	}
