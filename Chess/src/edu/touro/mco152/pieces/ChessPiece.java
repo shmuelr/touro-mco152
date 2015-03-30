@@ -5,16 +5,22 @@ public class ChessPiece {
 	public static enum PieceColor {
 		BLACK, WHITE
 		}
+	
+	
 			public static enum Type{
-			PAWN('P'), KNIGHT('N'), BISHOP('B'), ROOK('R'), KING('K'), QUEEN('Q');
+			PAWN('P',1), KNIGHT('N', 2.5), BISHOP('B',3), ROOK('R',5), KING('K',0), QUEEN('Q',9);
 			char representation;
-			Type(char representation){
+			double value;
+			Type(char representation, double value){
 			this.representation = representation;
+			this.value = value;
 		}
 	}
 	
+			
+			
 	protected final PieceColor color;
-	 private Type type;
+	private Type type;
 	
 	
 	public ChessPiece(Type type, PieceColor color){
