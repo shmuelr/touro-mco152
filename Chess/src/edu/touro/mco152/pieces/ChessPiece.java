@@ -21,6 +21,10 @@ public class ChessPiece {
 			this.representation = representation;
 			this.value = value;
 		}
+		
+		public double getValue(){
+			return value;
+		}
 	}
 	
 	
