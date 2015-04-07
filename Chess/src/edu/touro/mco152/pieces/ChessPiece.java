@@ -20,12 +20,16 @@ public class ChessPiece {
 			
 			
 	protected final PieceColor color;
-	private Type type;
+	private final Type type;
+	private final char pieceChar;
 	
 	
 	public ChessPiece(Type type, PieceColor color){
 		this.type = type;
 		this.color = color;
+		pieceChar = isWhite() ? 
+				Character.toUpperCase(type.representation) : 
+					Character.toLowerCase(type.representation);
 		}
 	 public static ChessPiece getPiece(Type type, PieceColor color){
 		 return new ChessPiece(type, color);
@@ -57,9 +61,7 @@ public class ChessPiece {
 	@Override
 	public String toString() 
 	{
-		return isWhite() ? 
-				Character.toString(Character.toUpperCase(type.representation)) : 
-					Character.toString(Character.toLowerCase(type.representation));
+		return Character.toString(pieceChar);
 	}
 	
 	
