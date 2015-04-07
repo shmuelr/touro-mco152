@@ -2,20 +2,34 @@ package edu.touro.mco152.pieces;
 
 
 public class ChessPiece {
-	public static enum PieceColor {
-		BLACK, WHITE
-		}
+	
+	public static double PAWN_VALUE 	= 1.0;
+	public static double KNIGHT_VALUE 	= 2.5;
+	public static double BISHOP_VALUE 	= 3.0;
+	public static double ROOK_VALUE 	= 5.0;
+	public static double QUEEN_VALUE 	= 9.0;
+	public static double KING_VALUE 	= 9.0;
 	
 	
-			public static enum Type{
-			PAWN('P',1), KNIGHT('N', 2.5), BISHOP('B',3), ROOK('R',5), KING('K',0), QUEEN('Q',9);
-			char representation;
-			double value;
-			Type(char representation, double value){
+	public static enum Type{
+		PAWN('P', PAWN_VALUE), KNIGHT('N', KNIGHT_VALUE), BISHOP('B', BISHOP_VALUE), ROOK('R', ROOK_VALUE), KING('K', QUEEN_VALUE), QUEEN('Q', KING_VALUE);
+		
+		private char representation;
+		private double value;
+		
+		Type(char representation, double value){
 			this.representation = representation;
 			this.value = value;
 		}
 	}
+	
+	
+	public static enum PieceColor {
+		BLACK, WHITE
+	}
+	
+	
+	
 	
 			
 			
