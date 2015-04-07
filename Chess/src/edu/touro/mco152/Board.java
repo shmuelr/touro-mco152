@@ -77,18 +77,27 @@ public class Board {
 		return chessPieces;
 	}
 	
+	private List<ChessPiece> getListOfPieces(PieceColor color)
+	{
+		
+		List<ChessPiece> chessPieces = getListOfPieces();
+		List<ChessPiece> chessPiecesByColor = new ArrayList<>(MAX_PIECE_COUNT/2);
+		
+			for (ChessPiece piece : chessPieces){
+				if(piece.getColor() == color){
+					chessPiecesByColor.add(piece);
+				}
+			}
+		
+		return chessPiecesByColor;
+	}
+	
 	public int getAmtOfPieces(){
 		return getListOfPieces().size();
 	}
 	
 	public int getAmtOfPiecesByColor(PieceColor color){
-		int count = 0;
-		for (ChessPiece piece : getListOfPieces()){
-			if (piece.getColor() == color){
-				count++;
-			}
-		}
-		return count;
+		return getListOfPieces(color).size();
 	}
 	
 	public int getAmtOfSpecificPiece(ChessPiece chessPiece){
