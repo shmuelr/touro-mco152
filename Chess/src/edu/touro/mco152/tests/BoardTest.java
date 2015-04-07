@@ -2,6 +2,8 @@ package edu.touro.mco152.tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.GraphicsDevice.WindowTranslucency;
+
 import org.junit.Test;
 
 import edu.touro.mco152.Board;
@@ -18,6 +20,30 @@ public class BoardTest {
 	}
 	
 	@Test
+	public void testBoardStrength() {
+		Board board = new Board();
+		board.setupBoard();
+		assertTrue(board.getBoardStrength(PieceColor.WHITE) == board.getBoardStrength(PieceColor.BLACK));
+	}
+	
+	@Test
+	public void testBoardStrengthByValue() {
+		Board board = new Board();
+		board.setupBoard();
+		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 47.0);
+	}
+	
+	@Test
+	public void testBoardStrengthPawnOverlap() {
+		Board board = new Board();
+		board.setupBoard();
+		board.movePiece('a', 2, 'b', 3);
+		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 46.0);
+	}
+	
+
+	
+	@Test
 	public void testBoardSize() {
 		Board board = new Board();
 		board.setupBoard();
@@ -28,7 +54,7 @@ public class BoardTest {
 	public void testSizeCountWhenAddPieceToBoard() {
 		Board board = new Board();
 		int boardSize = board.getAmtOfPieces();
-		board.addPieceToBoard(ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
+		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
 		assertEquals(boardSize+1, board.getAmtOfPieces());
 	}
 	
@@ -51,7 +77,7 @@ public class BoardTest {
 	public void testCountSpecificPieces(){
 		Board board = new Board();
 		board.setupBoard();
-		assertEquals(2, board.getAmtOfSpecificPiece(ChessPiece.getPiece(Type.BISHOP, PieceColor.BLACK)));
+		assertEquals(2, board.getAmtOfSpecificPiece(ChessPiece.buildNewPiece(Type.BISHOP, PieceColor.BLACK)));
 	}
 	
 	@Test
@@ -59,14 +85,14 @@ public class BoardTest {
 		Board board = new Board();
 		board.setupBoard();
 
-		assertEquals(ChessPiece.getPiece(Type.BISHOP, PieceColor.BLACK), board.getPiece('c', 8));
+		assertEquals(ChessPiece.buildNewPiece(Type.BISHOP, PieceColor.BLACK), board.getPiece('c', 8));
 	}
 	
 	@Test
 	public void testBoardPrintWhenAddPieceToBoard() {
 		Board board = new Board();
 		
-		board.addPieceToBoard(ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK), 'a', 2);
+		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 2);
 		
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
@@ -86,14 +112,14 @@ public class BoardTest {
 	@Test
 	public void testAddPieceToBoardWithConflict() {
 		Board board = new Board();
-		board.addPieceToBoard(ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
-		assertFalse(board.addPieceToBoard(ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK), 'a', 1));
+		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
+		assertFalse(board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1));
 	}
 	
 	@Test
 	public void testRemovePieceFromBoard() {
 		Board board = new Board();
-		board.addPieceToBoard(ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
+		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
 		assertTrue(board.removePieceFromBoard('a', 1));
 	}
 	

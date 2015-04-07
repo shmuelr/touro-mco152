@@ -2,13 +2,15 @@ package edu.touro.mco152;
 
 import java.util.Scanner;
 
+import edu.touro.mco152.pieces.ChessPiece.PieceColor;
+
 public class Application {
 
 	public static void main(String[] args) {
 		Board board = new Board();
 		board.setupBoard();
 		
-		System.out.println("Welcome to the chess game. You can move pieces by typeing move a3 d4. Type exit to exit the game. Enjoy!");
+		System.out.println("Welcome to the chess game.\n\nYou can move pieces by typing move a3 d4.\nType 's' to dispay the board strength.\nType exit to exit the game.\n\nEnjoy!\n");
 		System.out.println(board.printBoard());
 		Scanner scanner = new Scanner(System.in);
 		
@@ -26,7 +28,16 @@ public class Application {
 						);
 				
 				System.out.println("Result = "+result);
+			}else if(input.equals("s")){
+				
+				System.out.println("Black board strength = "+board.getBoardStrength(PieceColor.BLACK));
+				System.out.println("White board strength = "+board.getBoardStrength(PieceColor.WHITE));
+				
+				
 			}
+			
+			
+			
 			
 			System.out.println(board.printBoard());
 			input = scanner.nextLine();

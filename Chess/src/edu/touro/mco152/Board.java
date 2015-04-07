@@ -47,18 +47,18 @@ public class Board {
 	public ChessPiece generatePiece(char c) {
 		
 		switch(c) {
-			case 'P': return ChessPiece.getPiece(Type.PAWN,PieceColor.WHITE);
-			case 'p': return ChessPiece.getPiece(Type.PAWN,PieceColor.BLACK);
-			case 'R': return ChessPiece.getPiece(Type.ROOK,PieceColor.WHITE);
-			case 'r': return ChessPiece.getPiece(Type.ROOK,PieceColor.BLACK);
-			case 'N': return ChessPiece.getPiece(Type.KNIGHT,PieceColor.WHITE);
-			case 'n': return ChessPiece.getPiece(Type.KNIGHT,PieceColor.BLACK);
-			case 'B': return ChessPiece.getPiece(Type.BISHOP,PieceColor.WHITE);
-			case 'b': return ChessPiece.getPiece(Type.BISHOP,PieceColor.BLACK);
-			case 'K': return ChessPiece.getPiece(Type.KING,PieceColor.WHITE);
-			case 'k': return ChessPiece.getPiece(Type.KING,PieceColor.BLACK);
-			case 'Q': return ChessPiece.getPiece(Type.QUEEN,PieceColor.WHITE);
-			case 'q': return ChessPiece.getPiece(Type.QUEEN,PieceColor.BLACK);
+			case 'P': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.WHITE);
+			case 'p': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
+			case 'R': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.WHITE);
+			case 'r': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.BLACK);
+			case 'N': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.WHITE);
+			case 'n': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.BLACK);
+			case 'B': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.WHITE);
+			case 'b': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.BLACK);
+			case 'K': return ChessPiece.buildNewPiece(Type.KING,PieceColor.WHITE);
+			case 'k': return ChessPiece.buildNewPiece(Type.KING,PieceColor.BLACK);
+			case 'Q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.WHITE);
+			case 'q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.BLACK);
 			default: return null;
 		}
 	}
@@ -90,6 +90,57 @@ public class Board {
 			}
 		
 		return chessPiecesByColor;
+	}
+	
+	
+	public double getBoardStrength(PieceColor color){
+		double strength = 0;
+		
+		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
+			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
+				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
+				{
+					strength += getValueOfPieceAtPosition(i, j);
+					
+					
+				}
+			}
+		}
+		
+		return strength;
+	}
+	
+	
+	private double getValueOfPieceAtPosition(int x, int y)
+	{
+		double value = 0;
+		
+		if(pieces[x][y].getType() == Type.PAWN){
+			
+			if(areMultiplePawnsOnColumn(x, pieces[x][y].getColor())){
+				value =  ChessPiece.PAWN_VALUE -.5;
+			}else{
+				value =  ChessPiece.PAWN_VALUE;
+			}
+			
+			
+		}else{	
+			value = pieces[x][y].getValue();
+		}
+		
+		return value;
+	}
+	
+	private boolean areMultiplePawnsOnColumn(int x, PieceColor color){
+		int amtOfPawns = 0;
+		
+		for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
+			if(pieces[x][y] != null && pieces[x][y].getColor() == color && pieces[x][y].getType() == Type.PAWN){
+				amtOfPawns ++;
+			}
+		}
+		
+		return amtOfPawns > 1;
 	}
 	
 	public int getAmtOfPieces(){

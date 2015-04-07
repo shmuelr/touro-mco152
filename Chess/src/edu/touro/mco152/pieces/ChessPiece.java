@@ -1,5 +1,7 @@
 package edu.touro.mco152.pieces;
 
+import edu.touro.mco152.pieces.ChessPiece.Type;
+
 
 public class ChessPiece {
 	
@@ -49,19 +51,28 @@ public class ChessPiece {
 				Character.toUpperCase(type.representation) : 
 					Character.toLowerCase(type.representation);
 		}
-	 public static ChessPiece getPiece(Type type, PieceColor color){
+	
+	 public static ChessPiece buildNewPiece(Type type, PieceColor color)
+	 {
 		 return new ChessPiece(type, color);
-		 }
+	 }
 
-	/**
-	 * creates black pieces
-	 */
 	
 	public PieceColor getColor()
 	{
 		return color;
 	}
 
+	public Type getType() 
+	{
+		return type;
+	}
+	
+	public double getValue()
+	{
+		return type.getValue();
+	}
+	
 	public boolean isWhite(){
 		return color == PieceColor.WHITE;
 	}
@@ -90,4 +101,6 @@ public class ChessPiece {
 		}
 		return false;
 	}
+
+
 }
