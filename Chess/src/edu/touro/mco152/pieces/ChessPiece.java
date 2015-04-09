@@ -1,9 +1,7 @@
 package edu.touro.mco152.pieces;
 
-import edu.touro.mco152.pieces.ChessPiece.Type;
 
-
-public class ChessPiece {
+public class ChessPiece implements Comparable<ChessPiece>{
 	
 	public static double PAWN_VALUE 	= 1.0;
 	public static double KNIGHT_VALUE 	= 2.5;
@@ -102,5 +100,20 @@ public class ChessPiece {
 		return false;
 	}
 
+	@Override
+	public int compareTo(ChessPiece o) 
+	{
+		int result = 0;
+		if(this.getValue() > o.getValue()){
+			result = 1;
+		}else if (this.getValue() < o.getValue()){
+			result = -1;
+		}
+		
+		return result;
+	}
 
+
+	
+	
 }
