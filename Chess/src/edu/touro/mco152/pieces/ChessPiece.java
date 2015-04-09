@@ -8,11 +8,11 @@ public class ChessPiece implements Comparable<ChessPiece>{
 	public static double BISHOP_VALUE 	= 3.0;
 	public static double ROOK_VALUE 	= 5.0;
 	public static double QUEEN_VALUE 	= 9.0;
-	public static double KING_VALUE 	= 9.0;
+	public static double KING_VALUE 	= 0.0;
 	
 	
 	public static enum Type{
-		PAWN('P', PAWN_VALUE), KNIGHT('N', KNIGHT_VALUE), BISHOP('B', BISHOP_VALUE), ROOK('R', ROOK_VALUE), KING('K', QUEEN_VALUE), QUEEN('Q', KING_VALUE);
+		PAWN('P', PAWN_VALUE), KNIGHT('N', KNIGHT_VALUE), BISHOP('B', BISHOP_VALUE), ROOK('R', ROOK_VALUE), QUEEN('Q', QUEEN_VALUE), KING('K', KING_VALUE);
 		
 		private char representation;
 		private double value;
@@ -101,16 +101,20 @@ public class ChessPiece implements Comparable<ChessPiece>{
 	}
 
 	@Override
-	public int compareTo(ChessPiece o) 
+	public int compareTo(ChessPiece that) 
 	{
-		int result = 0;
-		if(this.getValue() > o.getValue()){
-			result = 1;
-		}else if (this.getValue() < o.getValue()){
-			result = -1;
+		final int LESS = -1;
+	    final int EQUAL = 0;
+	    final int GREATER = 1;
+		
+		if(this.getValue() > that.getValue()){
+			return GREATER;
+		}
+		if (this.getValue() < that.getValue()){
+			return LESS;
 		}
 		
-		return result;
+		return EQUAL;
 	}
 
 

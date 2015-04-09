@@ -3,6 +3,8 @@ package edu.touro.mco152;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import edu.touro.mco152.pieces.ChessPiece;
@@ -77,7 +79,7 @@ public class Board {
 		return chessPieces;
 	}
 	
-	private List<ChessPiece> getListOfPieces(PieceColor color)
+	public List<ChessPiece> getListOfPieces(PieceColor color)
 	{
 		
 		List<ChessPiece> chessPieces = getListOfPieces();
@@ -88,7 +90,9 @@ public class Board {
 					chessPiecesByColor.add(piece);
 				}
 			}
-		
+			
+		Collections.sort(chessPiecesByColor);
+			
 		return chessPiecesByColor;
 	}
 	

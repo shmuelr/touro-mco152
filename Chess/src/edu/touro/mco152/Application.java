@@ -2,6 +2,7 @@ package edu.touro.mco152;
 
 import java.util.Scanner;
 
+import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
 public class Application {
@@ -31,7 +32,13 @@ public class Application {
 			}else if(input.equals("s")){
 				
 				System.out.println("Black board strength = "+board.getBoardStrength(PieceColor.BLACK));
+				for(ChessPiece p :board.getListOfPieces(PieceColor.BLACK))System.out.print(p);
+				System.out.println(" ");
+				
+				
 				System.out.println("White board strength = "+board.getBoardStrength(PieceColor.WHITE));
+				for(ChessPiece p :board.getListOfPieces(PieceColor.WHITE))System.out.print(p);
+				System.out.println(" ");
 				
 				
 			}

@@ -3,6 +3,7 @@ package edu.touro.mco152.tests;
 import static org.junit.Assert.*;
 
 import java.awt.GraphicsDevice.WindowTranslucency;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class BoardTest {
 	public void testBoardStrengthByValue() {
 		Board board = new Board();
 		board.setupBoard();
-		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 47.0);
+		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 38.0);
 	}
 	
 	@Test
@@ -38,9 +39,26 @@ public class BoardTest {
 		Board board = new Board();
 		board.setupBoard();
 		board.movePiece('a', 2, 'b', 3);
-		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 46.0);
+		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 37.0);
 	}
 	
+	@Test
+	public void testBoarGetListPiecesForColor() {
+		Board board = new Board();
+		board.setupBoard();
+		List<ChessPiece> listOfBlackPieces = board.getListOfPieces(PieceColor.BLACK);
+		assertTrue(listOfBlackPieces.size() == 16);
+	}
+	
+	@Test
+	public void testBoarGetSortedListPiecesForColor() {
+		Board board = new Board();
+		board.setupBoard();
+		List<ChessPiece> listOfBlackPieces = board.getListOfPieces(PieceColor.BLACK);
+		
+		// The king should be first because it has the lowest value
+		assertTrue(listOfBlackPieces.get(0).equals(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK)));
+	}
 
 	
 	@Test
