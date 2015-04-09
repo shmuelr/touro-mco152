@@ -177,8 +177,6 @@ public class Board {
 	}
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
-		System.out.println(x1+" "+y1);
-		System.out.println(x2+" "+y2);
 		
 		return movePiece(
 				Character.toLowerCase(x1) - 'a',
@@ -189,8 +187,6 @@ public class Board {
 	
 	
 	private int movePiece(int x1, int y1, int x2, int y2){
-		System.out.println(x1+" "+y1);
-		System.out.println(x2+" "+y2);
 		
 		if(pieces[x1][y1] == null) return ERROR_NO_SOURCE_PIECE;
 		if(pieces[x2][y2] != null) return ERROR_PIECE_IN_DESTINATION;
