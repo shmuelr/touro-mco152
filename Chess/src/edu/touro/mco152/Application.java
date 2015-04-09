@@ -2,6 +2,8 @@ package edu.touro.mco152;
 
 import java.util.Scanner;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 
@@ -28,7 +30,9 @@ public class Application {
 						Character.getNumericValue(instruction[2].charAt(1))
 						);
 				
-				System.out.println("Result = "+result);
+				printMessageForMoveResult(result);
+
+				
 			}else if(input.equals("s")){
 				
 				System.out.println("Black board strength = "+board.getBoardStrength(PieceColor.BLACK));
@@ -49,6 +53,21 @@ public class Application {
 			System.out.println(board.printBoard());
 			input = scanner.nextLine();
 		}
+		
+	}
+
+	private static void printMessageForMoveResult(int result) {
+		
+		if(result == Board.MOVE_ERROR_NO_SOURCE_PIECE){
+			System.out.println("Error: no piece in the source position");
+		}else if(result == Board.MOVE_ERROR_PIECE_IN_DESTINATION){
+			System.out.println("Error: destination occupied");
+		}else if(result == Board.MOVE_ERROR_INVALID_MOVE){
+			System.out.println("Error: invalid move");
+		}else if(result == Board.MOVE_ERROR_INVALID_POSITION){
+			System.out.println("Error: invalid position");
+		}
+		
 		
 	}
 
