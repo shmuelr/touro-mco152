@@ -123,7 +123,7 @@ public class Board {
 		double value = 0;
 		
 		if(pieces[position.getX()][position.getY()].getType() == Type.PAWN){
-			
+
 			if(areMultiplePawnsOnColumn(position)){
 				value =  ChessPiece.PAWN_VALUE -.5;
 			}else{
@@ -145,12 +145,12 @@ public class Board {
 		ChessPiece piece = pieces[position.getX()][position.getY()];	       
 		
 		for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
-			// If we are looking at the same square
-			if(y == position.getY()) continue;
-			// also continue if it is null
+			
+			// Continue if it is null
 			if(pieces[COLUMN][y] == null) continue;
 			
-			if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor()){
+			if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor())
+			{
 				amtOfPawns ++;
 			}
 			

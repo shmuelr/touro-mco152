@@ -1,7 +1,12 @@
 package edu.touro.mco152;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Position {
 
+	
+	private static final Map<Integer, Position> positions = new HashMap<Integer, Position>();
 	private final int x,y;
 	
 	private Position(int x, int y) {
@@ -15,11 +20,21 @@ public class Position {
 		int x = Character.toLowerCase(charX) - 'a';
 		int y = Board.DEFAULT_BOARD_SIZE - initialY;
 		
-		return new Position(x, y);
+		return getPostion(x, y);
 	}
 	
 	public static Position buildPostionFromXYCoords(int x, int y) {
-		return new Position(x, y);
+		return getPostion(x, y);
+	}
+	
+	private static Position getPostion(int x, int y){
+		if(positions.containsKey(getHashKey(x, y))){
+			return positions.get(getHashKey(x, y));
+		}else{
+			Position p = new Position(x, y);
+			positions.put(getHashKey(x, y), p);
+			return p;
+		}
 	}
 	
 	
@@ -35,7 +50,7 @@ public class Position {
 	@Override
 	public int hashCode() {
 		// A simple hash implementation
-		return (x * 3) + (y * 17);
+		return getHashKey(x, y);
 	}
 	
 	@Override
@@ -46,6 +61,9 @@ public class Position {
 		return false;
 	}
 
+	private static Integer getHashKey(int x, int y){
+		return (x * 3) + (y * 17);
+	}
 
 
 }
