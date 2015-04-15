@@ -13,8 +13,8 @@ import edu.touro.mco152.pieces.ChessPiece.Type;
 
 public class Board {
 
-	private static final int MAX_PIECE_COUNT = 32;
-	private static final int DEFAULT_BOARD_SIZE = 8;
+	public static final int MAX_PIECE_COUNT = 32;
+	public static final int DEFAULT_BOARD_SIZE = 8;
 	
 	private final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
 	
@@ -181,33 +181,38 @@ public class Board {
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
 		
-		return movePiece(
-				Character.toLowerCase(x1) - 'a',
-				DEFAULT_BOARD_SIZE - y1,
-				Character.toLowerCase(x2) - 'a',
-				DEFAULT_BOARD_SIZE - y2);
+		return movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
 	}
 	
+	private boolean isValidPostion(Position position){
+		return ( position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
+	}
 	
-	private int movePiece(int x1, int y1, int x2, int y2){
-		// First check if the locations are valid so we don't crash the program
-		if( x1 < 0 || x1 > DEFAULT_BOARD_SIZE || x2 < 0 || x2 > DEFAULT_BOARD_SIZE || y1 < 0 || y1 > DEFAULT_BOARD_SIZE || y2 < 0 || y2 > DEFAULT_BOARD_SIZE) return MOVE_ERROR_INVALID_POSITION;
+	private boolean isPositionOccupied(Position position){
+		return pieces[position.getX()][position.getY()] != null;
+	}
+	
+	private int movePiece(Position from, Position to){
+		
+		// First check if the locations are valid so we don't crash the program if the user gives us bad coordinates
+		if(!isValidPostion(from) || !isValidPostion(to)) 
+			return MOVE_ERROR_INVALID_POSITION;
 		
 		// Then check if there exists a piece that should be move
-		if(pieces[x1][y1] == null) 
+		if(!isPositionOccupied(from)) 
 			return MOVE_ERROR_NO_SOURCE_PIECE;
 		
 		// Next check if there is a user's piece already in that location
-		if(pieces[x2][y2] != null 
-				&& (pieces[x1][y1].getColor() == pieces[x2][y2].getColor())) 
+		if(isPositionOccupied(to) 
+				&& (pieces[from.getX()][from.getY()].getColor() == pieces[to.getX()][to.getY()].getColor())) 
 			return MOVE_ERROR_PIECE_IN_DESTINATION;
 		
 		// Last check if the move is valid for the selected piece
-		if(!isValidMove(x1,y1,x2,y2)) return MOVE_ERROR_INVALID_MOVE;
+		if(!isValidMove(from, to)) return MOVE_ERROR_INVALID_MOVE;
 		
 		
-		pieces[x2][y2] = pieces[x1][y1];
-		pieces[x1][y1] = null;
+		pieces[to.getX()][to.getY()] = pieces[from.getX()][from.getY()];
+		pieces[from.getX()][from.getY()] = null;
 		
 		return MOVE_SUCCESS;
 	}
@@ -219,17 +224,17 @@ public class Board {
 	 * this method should have serious tests 
 	 */
 	
-	private boolean isValidMove(int x1, int y1, int x2, int y2) {
-		ChessPiece pieceToMove = pieces[x1][y1];
+	private boolean isValidMove(Position from, Position to) {
+		ChessPiece pieceToMove = pieces[from.getX()][from.getY()];
 		if(pieceToMove.getType() == Type.KING){
-			System.out.println("Moving King "+x1+", "+y1+" "+x2+", "+y2);
 			
 			// A King can only move one space in any direction
-			if(absDistanceBetweenTwoPoints(x1,x2) > 1 || absDistanceBetweenTwoPoints(y1,y2) > 1) return false;
+			if(absDistanceBetweenTwoPoints(from.getX(),to.getX()) > 1 || absDistanceBetweenTwoPoints(from.getY(),to.getY()) > 1) return false;
 			
 		}else if (pieceToMove.getType() == Type.ROOK){
+			
 			// A Rook can only move horizontally or vertically
-			if(x1 != x2 && y1 != y2) return false;
+			if(from.getX() != to.getX() && from.getY() != to.getY()) return false;
 			
 			/**
 			 * TODO - Implement castling over here
@@ -238,19 +243,27 @@ public class Board {
 			 */
 
 			// A Rook cannot jump over another piece
-			if(x1 == x2){
-				if (existsPieceOnColumnBetweenTwoPoints(x1, y1, y2)) return false;
+			// If x's are equal we are moving along that x axis ie moving up or down a column
+			if(from.getX() == to.getX()){
+				if (existsPieceOnColumnBetweenTwoPoints(from.getX(), from.getY(), to.getY())) return false;
 			}
-			if (y1 == y2){
-				if (existsPieceOnRowBetweenTwoPoints(y1, x1, x2)) return false;
+			// If y's are equal we are moving across that y axis ie moving across a row
+			if (from.getY() == to.getY()){
+				if (existsPieceOnRowBetweenTwoPoints(from.getY(), from.getX(), to.getX())) return false;
 			}
+			
 		}else if (pieceToMove.getType() == Type.BISHOP){
+			
 			// Should be pretty simple to implement
-			// Just need to verify that the positions are on the same diagonal and that there are no pieces inbetween
+			// Just need to verify that the positions are on the same diagonal and that there are no pieces in between
+			
 		}else if (pieceToMove.getType() == Type.QUEEN){
+			
 			// Need to verify that the pieces are either on the same row, column or diagonal
-			// Need to make sure there are no pieces inbetween.
+			// Need to make sure there are no pieces in between.
+			
 		}else if (pieceToMove.getType() == Type.PAWN){
+			
 			// Usually it can only move on space forward
 			// Except:
 			//		First move can move 2 spaces forward
@@ -261,9 +274,12 @@ public class Board {
 			//				- Where should the history be kept? In the board class? In application class? Is it related to the board? I guess it is..
 			//				  The current board is really just a history of the board moves. It may make sense to store the moves with the board
 			//				  There should probably be a Move class to make it easy to store this data. We can use a List<Move> to keep track of this.
+			
 		}else if (pieceToMove.getType() == Type.KNIGHT){
+			
 			// Moves in a unique pattern and jumps over pieces in the way
 			// Should be pretty easy to implement
+			
 		}
 		
 		return true;
