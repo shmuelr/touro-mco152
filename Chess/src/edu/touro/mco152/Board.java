@@ -170,13 +170,12 @@ public class Board {
 
 	public ChessPiece getPiece(char x, int y)
 	{
-		return getPiece(Character.toLowerCase(x) - 'a',
-				DEFAULT_BOARD_SIZE - y);
+		return getPiece(Position.buildPostionFromChessCoords(x, y));
 	}
 	
-	private ChessPiece getPiece(int x, int y)
+	private ChessPiece getPiece(Position position)
 	{
-		return pieces[x][y];
+		return pieces[position.getX()][position.getY()];
 	}
 	
 	public int movePiece(char x1, int y1, char x2, int y2){
