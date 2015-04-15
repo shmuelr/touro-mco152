@@ -18,6 +18,10 @@ public class Position {
 		return new Position(x, y);
 	}
 	
+	public static Position buildPostionFromXYCoords(int x, int y) {
+		return new Position(x, y);
+	}
+	
 	
 	public int getX() {
 		return x;
@@ -41,4 +45,7 @@ public class Position {
 		}
 		return false;
 	}
+
+
+
 }

@@ -107,7 +107,7 @@ public class Board {
 			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
 				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
 				{
-					strength += getValueOfPieceAtPosition(i, j);
+					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));
 					
 					
 				}
@@ -118,33 +118,42 @@ public class Board {
 	}
 	
 	
-	private double getValueOfPieceAtPosition(int x, int y)
+	private double getValueOfPieceAtPosition(Position position)
 	{
 		double value = 0;
 		
-		if(pieces[x][y].getType() == Type.PAWN){
+		if(pieces[position.getX()][position.getY()].getType() == Type.PAWN){
 			
-			if(areMultiplePawnsOnColumn(x, pieces[x][y].getColor())){
+			if(areMultiplePawnsOnColumn(position)){
 				value =  ChessPiece.PAWN_VALUE -.5;
 			}else{
 				value =  ChessPiece.PAWN_VALUE;
 			}
-			
-			
+				
 		}else{	
-			value = pieces[x][y].getValue();
+			
+			value = pieces[position.getX()][position.getY()].getValue();
 		}
 		
 		return value;
 	}
 	
-	private boolean areMultiplePawnsOnColumn(int x, PieceColor color){
+	private boolean areMultiplePawnsOnColumn(Position position){
 		int amtOfPawns = 0;
+		final int COLUMN = position.getX();
+		
+		ChessPiece piece = pieces[position.getX()][position.getY()];	       
 		
 		for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
-			if(pieces[x][y] != null && pieces[x][y].getColor() == color && pieces[x][y].getType() == Type.PAWN){
+			// If we are looking at the same square
+			if(y == position.getY()) continue;
+			// also continue if it is null
+			if(pieces[COLUMN][y] == null) continue;
+			
+			if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor()){
 				amtOfPawns ++;
 			}
+			
 		}
 		
 		return amtOfPawns > 1;
