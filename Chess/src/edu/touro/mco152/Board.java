@@ -99,7 +99,7 @@ public class Board {
 		return chessPiecesByColor;
 	}
 	
-	
+	// Move to Game Logic
 	public double getBoardStrength(PieceColor color){
 		double strength = 0;
 		
@@ -117,7 +117,7 @@ public class Board {
 		return strength;
 	}
 	
-	
+	// Move to Game Logic
 	private double getValueOfPieceAtPosition(Position position)
 	{
 		double value = 0;
@@ -138,6 +138,7 @@ public class Board {
 		return value;
 	}
 	
+	// Move to Game Logic
 	private boolean areMultiplePawnsOnColumn(Position position){
 		int amtOfPawns = 0;
 		final int COLUMN = position.getX();
@@ -187,19 +188,23 @@ public class Board {
 		return pieces[position.getX()][position.getY()];
 	}
 	
+	// Move to Game Logic
 	public int movePiece(char x1, int y1, char x2, int y2){
 		
 		return movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
 	}
-	
+
+	// Move to Game Logic
 	private boolean isValidPostion(Position position){
 		return ( position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
 	}
 	
+	// Move to Game Logic
 	private boolean isPositionOccupied(Position position){
 		return pieces[position.getX()][position.getY()] != null;
 	}
 	
+	// Move to Game Logic
 	private int movePiece(Position from, Position to){
 		
 		// First check if the locations are valid so we don't crash the program if the user gives us bad coordinates
@@ -231,7 +236,7 @@ public class Board {
 	 * 
 	 * this method should have serious tests 
 	 */
-	
+	// Move to Game Logic
 	private boolean isValidMove(Position from, Position to) {
 		ChessPiece pieceToMove = pieces[from.getX()][from.getY()];
 		if(pieceToMove.getType() == Type.KING){
@@ -293,12 +298,12 @@ public class Board {
 		return true;
 	}
 	
-	
+	// Move to Game Logic
 	private int absDistanceBetweenTwoPoints(int x1, int x2)
 	{
 		return Math.abs(x1-x2);
 	}
-	
+	// Move to Game Logic
 	private boolean existsPieceOnColumnBetweenTwoPoints(int x, int y1, int y2)
 	{	
 		// Look from one space ahead so that it ignores the rook itself (hence the +1)
@@ -307,7 +312,7 @@ public class Board {
 		}
 		return false;
 	}
-	
+	// Move to Game Logic
 	private boolean existsPieceOnRowBetweenTwoPoints(int y, int x1, int x2)
 	{
 		// Look from one space ahead so that it ignores the rook itself (hence the +1)
@@ -324,7 +329,7 @@ public class Board {
 	 * It may be very easy, just cycle through the enemy pieces and check if they can move to the given square
 	 * 
 	 */
-	
+	// Move to Game Logic
 	private boolean isSquareThreatedBy(PieceColor color, int x, int y){
 		
 		return false;
