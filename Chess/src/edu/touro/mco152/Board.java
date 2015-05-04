@@ -189,46 +189,33 @@ public class Board {
 	}
 	
 	// Move to Game Logic
-	public int movePiece(char x1, int y1, char x2, int y2){
+	public void movePiece(char x1, int y1, char x2, int y2){
 		
-		return movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
+	 movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
 	}
 
 	// Move to Game Logic
-	private boolean isValidPostion(Position position){
+	public boolean isValidPostion(Position position){
 		return ( position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
 	}
 	
 	// Move to Game Logic
-	private boolean isPositionOccupied(Position position){
+	public boolean isPositionOccupied(Position position){
 		return pieces[position.getX()][position.getY()] != null;
 	}
 	
 	// Move to Game Logic
-	private int movePiece(Position from, Position to){
-		
-		// First check if the locations are valid so we don't crash the program if the user gives us bad coordinates
-		if(!isValidPostion(from) || !isValidPostion(to)) 
-			return MOVE_ERROR_INVALID_POSITION;
-		
-		// Then check if there exists a piece that should be move
-		if(!isPositionOccupied(from)) 
-			return MOVE_ERROR_NO_SOURCE_PIECE;
-		
-		// Next check if there is a user's piece already in that location
-		if(isPositionOccupied(to) 
-				&& (pieces[from.getX()][from.getY()].getColor() == pieces[to.getX()][to.getY()].getColor())) 
-			return MOVE_ERROR_PIECE_IN_DESTINATION;
-		
-		// Last check if the move is valid for the selected piece
-		if(!isValidMove(from, to)) return MOVE_ERROR_INVALID_MOVE;
-		
+	public void movePiece(Position from, Position to){		
 		
 		pieces[to.getX()][to.getY()] = pieces[from.getX()][from.getY()];
-		pieces[from.getX()][from.getY()] = null;
-		
-		return MOVE_SUCCESS;
+		pieces[from.getX()][from.getY()] = null;	
 	}
+	
+	public boolean areSameColor(Position first, Position second){
+		
+		return (pieces[first.getX()][first.getY()].getColor() == pieces[second.getX()][second.getY()].getColor());
+	}
+	
 	/**
 	 * Method to determine if the attempted move is a valid move or not
 	 * 
@@ -303,6 +290,7 @@ public class Board {
 	{
 		return Math.abs(x1-x2);
 	}
+	
 	// Move to Game Logic
 	private boolean existsPieceOnColumnBetweenTwoPoints(int x, int y1, int y2)
 	{	
@@ -312,6 +300,7 @@ public class Board {
 		}
 		return false;
 	}
+	
 	// Move to Game Logic
 	private boolean existsPieceOnRowBetweenTwoPoints(int y, int x1, int x2)
 	{
@@ -320,7 +309,8 @@ public class Board {
 			if (pieces[i][y]!=null) return true;
 		}
 		return false;
-	}
+	}	
+	
 	
 	/**
 	 * TODO
