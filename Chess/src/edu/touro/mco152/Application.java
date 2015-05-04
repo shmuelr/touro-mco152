@@ -10,7 +10,7 @@ import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 public class Application {
 
 	public static void main(String[] args) {
-		Board board = new Board();
+		/*Board board = new Board();
 		board.setupBoard();
 		
 		System.out.println("Welcome to the chess game.\n\nYou can move pieces by typing move a3 d4.\nType 's' to dispay the board strength.\nType exit to exit the game.\n\nEnjoy!\n");
@@ -32,7 +32,7 @@ public class Application {
 				
 				//printMessageForMoveResult(result);
 
-				
+				/*
 			}else if(input.equals("s")){
 				
 				System.out.println("Black board strength = "+board.getBoardStrength(PieceColor.BLACK));
@@ -69,6 +69,7 @@ public class Application {
 		}
 		
 		
+	}*/
 	}
 
 }

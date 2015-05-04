@@ -21,7 +21,7 @@ public class Board {
 	public static final int MAX_PIECE_COUNT = 32;
 	public static final int DEFAULT_BOARD_SIZE = 8;
 	
-	private final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
+	public final ChessPiece[][] pieces = new ChessPiece[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
 	
 
 	public static final int MOVE_SUCCESS = 1;
@@ -51,7 +51,8 @@ public class Board {
 		int length = s.length()-1;
 		for (int i=0;i< DEFAULT_BOARD_SIZE;i++)
 		for (int j=DEFAULT_BOARD_SIZE-1;j>=0;j--)
-		pieces[j][i]= generatePiece(s.charAt(length--));
+		pieces[j][i]= generatePiece(s.charAt(length--));		
+		
 	}
 	
 	public ChessPiece generatePiece(char c) {
@@ -130,25 +131,8 @@ public class Board {
 	public ChessPiece getPiece(Position position)
 	{
 		return pieces[position.getX()][position.getY()];
-	}
+	}	
 	
-	// Move to Game Logic
-	public void movePiece(char x1, int y1, char x2, int y2){
-		
-	 movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
-	}
-
-	// Move to Game Logic
-	public boolean isValidPostion(Position position){
-		return ( position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
-	}
-	
-	// Move to Game Logic
-	public boolean isPositionOccupied(Position position){
-		return pieces[position.getX()][position.getY()] != null;
-	}
-	
-	// Move to Game Logic
 	public void movePiece(Position from, Position to){		
 		
 		pieces[to.getX()][to.getY()] = pieces[from.getX()][from.getY()];
@@ -158,10 +142,7 @@ public class Board {
 	public boolean areSameColor(Position first, Position second){
 		
 		return (pieces[first.getX()][first.getY()].getColor() == pieces[second.getX()][second.getY()].getColor());
-	}	
-	
-	
-	
+	}		
 	
 	// Move to Game Logic
 	private int absDistanceBetweenTwoPoints(int x1, int x2)

@@ -26,24 +26,22 @@ public class Game {
 		startGame();
 	}
 	
-	private void startGame(){
-		
-		board.setupBoard();
-		
+	private void startGame(){		
+		board.setupBoard();			
 	}	
  	
 	private int movePiece(Position from, Position to){
 		
 		
-		if(!board.isValidPostion(from) || !board.isValidPostion(to)) 
+		if(!isValidPostion(from) || !isValidPostion(to)) 
 			return MOVE_ERROR_INVALID_POSITION;
 		
 		// Then check if there exists a piece that should be move
-		if(!board.isPositionOccupied(from)) 
+		if(!isPositionOccupied(from)) 
 			return MOVE_ERROR_NO_SOURCE_PIECE;
 				
 		// Next check if there is a user's piece already in that location
-		if(board.isPositionOccupied(to) && board.areSameColor(from, to)) 
+		if(isPositionOccupied(to) && board.areSameColor(from, to)) 
 			return MOVE_ERROR_PIECE_IN_DESTINATION;
 				
 		// Last check if the move is valid for the selected piece
@@ -59,25 +57,6 @@ public class Game {
       return false;
 	}
 	
-	// Move to Game Logic
-    private double getValueOfPieceAtPosition(Position position)
-    {
-			double value = 0;
-			ChessPiece piece = board.getPiece(position);
-			
-			if(piece.getClass() == Pawn.class){
-
-				if(areMultiplePawnsOnColumn(position, piece.getColor() )){
-					value =  piece.getValue() -.5;
-				}
-					
-			}else{	
-				
-				value = piece.getValue();
-			}
-			
-			return value;
-	}
 		
     // Move to Game Logic
     private boolean areMultiplePawnsOnColumn(Position position, PieceColor color){
@@ -102,26 +81,56 @@ public class Game {
 			return amtOfPawns > 1;
 	}
     
+    // Move to Game Logic
+    private double getValueOfPieceAtPosition(Position position)
+    {
+			
+			ChessPiece piece = board.getPiece(position);
+			double value = piece.getValue();
+			
+			if(piece.getClass() == Pawn.class){
+
+				if(areMultiplePawnsOnColumn(position, piece.getColor() )){
+					value =  piece.getValue() -.5;
+				}									
+			}
+			
+			return value;
+	}
     
 	// Move to Game Logic
 	public double getBoardStrength(PieceColor color){
 		double strength = 0;
-		Position currenPiecePos;
+		Position currenPiecePos = new Position();
 		
-		for (int i = 0; i <  Board.DEFAULT_BOARD_SIZE;; i++){
-			for (int j = 0; j <  Board.DEFAULT_BOARD_SIZE;; j++){
+		for (int x = 0; x <  Board.DEFAULT_BOARD_SIZE; x++){
+			for (int y = 0; y <  Board.DEFAULT_BOARD_SIZE; y++){
+				currenPiecePos.setX(x);
+				currenPiecePos.setY(y);
 				
-				if(currenPiecePos==null)currenPiecePos = new P
-				
-				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
+				if(board.getPiece(currenPiecePos) != null && board.getPiece(currenPiecePos).getColor() == color)
 				{
-					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));					
-					
+					strength += getValueOfPieceAtPosition(currenPiecePos);	
 				}
+				
 			}
-		}
+		}		
 		
+		System.out.println(strength);
 		return strength;
 	}
+		
+    public boolean isPositionOccupied(Position position){
+			return board.getPiece(position) != null;
+    }
+    
+    public void movePiece(char x1, int y1, char x2, int y2){
+		
+ 	   movePiece(Position.buildPostionFromChessCoords(x1, y1), Position.buildPostionFromChessCoords(x2, y2));
+ 	}
+
+ 	public boolean isValidPostion(Position position){
+ 		return ( position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
+ 	}	
 		
 }

@@ -1,6 +1,6 @@
 package edu.touro.mco152.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -8,9 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+import edu.touro.mco152.pieces.Pawn;
 
 public class PawnTest {
 
@@ -32,15 +31,9 @@ public class PawnTest {
 
 	@Test
 	public void test() {
-		//fail("Not yet implemented");
-		ChessPiece p = ChessPiece.buildNewPiece(Type.PAWN,PieceColor.WHITE);
+		
+		Pawn p = new Pawn(PieceColor.WHITE);
 		assertTrue(p.isWhite());
-	}
-	
-	@Test
-	public void testBlackConstruct() {
-		ChessPiece p = ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
-		assertTrue(p.isBlack());
 	}
 
 }

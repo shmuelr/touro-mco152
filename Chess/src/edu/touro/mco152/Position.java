@@ -9,7 +9,7 @@ public class Position {
 	private static final Map<Integer, Position> positions = new HashMap<Integer, Position>();
 	private int x,y;
 	
-	private Position(int x, int y) {
+	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
