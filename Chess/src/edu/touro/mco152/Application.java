@@ -23,14 +23,14 @@ public class Application {
 			
 			if (input.startsWith("move")){
 				String[] instruction = input.split(" ");
-				int result =
-				board.movePiece(instruction[1].charAt(0), 
+				//int result =
+				/*board.movePiece(instruction[1].charAt(0), 
 						Character.getNumericValue(instruction[1].charAt(1)),
 						instruction[2].charAt(0),
 						Character.getNumericValue(instruction[2].charAt(1))
-						);
+						);*/
 				
-				printMessageForMoveResult(result);
+				//printMessageForMoveResult(result);
 
 				
 			}else if(input.equals("s")){
