@@ -183,7 +183,7 @@ public class Board {
 		return getPiece(Position.buildPostionFromChessCoords(x, y));
 	}
 	
-	private ChessPiece getPiece(Position position)
+	public ChessPiece getPiece(Position position)
 	{
 		return pieces[position.getX()][position.getY()];
 	}
@@ -214,7 +214,8 @@ public class Board {
 	public boolean areSameColor(Position first, Position second){
 		
 		return (pieces[first.getX()][first.getY()].getColor() == pieces[second.getX()][second.getY()].getColor());
-	}
+	}	
+	
 	
 	/**
 	 * Method to determine if the attempted move is a valid move or not
