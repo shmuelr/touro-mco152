@@ -42,8 +42,5 @@ public class PawnTest {
 		ChessPiece p = ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
 		assertTrue(p.isBlack());
 	}
-	
-
-
 
 }

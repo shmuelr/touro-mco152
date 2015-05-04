@@ -1,7 +1,7 @@
 package edu.touro.mco152;
 
 import edu.touro.mco152.pieces.ChessPiece;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+
 
 public class Game {
 
@@ -49,15 +49,8 @@ public class Game {
         return MOVE_SUCCESS;
 	}
 	
-	private boolean isValidMove(ChessPiece piece, Position to) {
-         		
+	private boolean isValidMove(ChessPiece piece, Position to) {		
 		
-		switch(piece.getType()){
-		
-		   case KING:
-			    break;
-			
-		}
 		
       return false;
 	}
