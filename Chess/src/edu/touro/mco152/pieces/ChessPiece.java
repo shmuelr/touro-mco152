@@ -28,9 +28,7 @@ public class ChessPiece implements Comparable<ChessPiece>{
 	}
 	
 	
-	public static enum PieceColor {
-		BLACK, WHITE
-	}
+	
 	
 	
 	
