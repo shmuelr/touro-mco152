@@ -2,14 +2,19 @@ package edu.touro.mco152;
 
 
 
+import java.awt.Window.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import edu.touro.mco152.pieces.Bishop;
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+import edu.touro.mco152.pieces.King;
+import edu.touro.mco152.pieces.Knight;
+import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.Queen;
+import edu.touro.mco152.pieces.Rook;
 
 public class Board {
 
@@ -52,18 +57,18 @@ public class Board {
 	public ChessPiece generatePiece(char c) {
 		
 		switch(c) {
-			case 'P': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.WHITE);
-			case 'p': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
-			case 'R': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.WHITE);
-			case 'r': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.BLACK);
-			case 'N': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.WHITE);
-			case 'n': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.BLACK);
-			case 'B': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.WHITE);
-			case 'b': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.BLACK);
-			case 'K': return ChessPiece.buildNewPiece(Type.KING,PieceColor.WHITE);
-			case 'k': return ChessPiece.buildNewPiece(Type.KING,PieceColor.BLACK);
-			case 'Q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.WHITE);
-			case 'q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.BLACK);
+			case 'P': return new Pawn(PieceColor.WHITE);
+			case 'p': return new Pawn(PieceColor.BLACK);
+			case 'R': return new Rook(PieceColor.WHITE);
+			case 'r': return new Rook(PieceColor.BLACK);
+			case 'N': return new Knight(PieceColor.WHITE);
+			case 'n': return new Knight(PieceColor.BLACK);
+			case 'B': return new Bishop(PieceColor.WHITE);
+			case 'b': return new Bishop(PieceColor.BLACK);
+			case 'K': return new King(PieceColor.WHITE);
+			case 'k': return new King(PieceColor.BLACK);
+			case 'Q': return new Queen(PieceColor.WHITE);
+			case 'q': return new Queen(PieceColor.BLACK);
 			default: return null;
 		}
 	}
@@ -107,8 +112,7 @@ public class Board {
 			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
 				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
 				{
-					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));
-					
+					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));					
 					
 				}
 			}
@@ -117,48 +121,6 @@ public class Board {
 		return strength;
 	}
 	
-	// Move to Game Logic
-	private double getValueOfPieceAtPosition(Position position)
-	{
-		double value = 0;
-		
-		if(pieces[position.getX()][position.getY()].getType() == Type.PAWN){
-
-			if(areMultiplePawnsOnColumn(position)){
-				value =  ChessPiece.PAWN_VALUE -.5;
-			}else{
-				value =  ChessPiece.PAWN_VALUE;
-			}
-				
-		}else{	
-			
-			value = pieces[position.getX()][position.getY()].getValue();
-		}
-		
-		return value;
-	}
-	
-	// Move to Game Logic
-	private boolean areMultiplePawnsOnColumn(Position position){
-		int amtOfPawns = 0;
-		final int COLUMN = position.getX();
-		
-		ChessPiece piece = pieces[position.getX()][position.getY()];	       
-		
-		for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
-			
-			// Continue if it is null
-			if(pieces[COLUMN][y] == null) continue;
-			
-			if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor())
-			{
-				amtOfPawns ++;
-			}
-			
-		}
-		
-		return amtOfPawns > 1;
-	}
 	
 	public int getAmtOfPieces(){
 		return getListOfPieces().size();

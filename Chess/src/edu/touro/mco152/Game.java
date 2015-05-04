@@ -1,6 +1,9 @@
 package edu.touro.mco152;
 
+import java.awt.Window.Type;
+
 import edu.touro.mco152.pieces.ChessPiece;
+import edu.touro.mco152.pieces.Pawn;
 
 
 public class Game {
@@ -54,4 +57,49 @@ public class Game {
 		
       return false;
 	}
+	
+	// Move to Game Logic
+    private double getValueOfPieceAtPosition(Position position)
+    {
+			double value = 0;
+			ChessPiece piece = board.getPiece(position);
+			
+			if(piece.getClass() == Pawn.class){
+
+				if(areMultiplePawnsOnColumn(position)){
+					value =  piece.getValue() -.5;
+				}
+					
+			}else{	
+				
+				value = piece.getValue();
+			}
+			
+			return value;
+	}
+		
+    // Move to Game Logic
+    private boolean areMultiplePawnsOnColumn(Position position){
+			int amtOfPawns = 0;
+			final int COLUMN = position.getX();
+			
+			
+			
+			for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
+				
+				position.
+				
+				// Continue if it is null
+				if(board.getPiece(position) == null) continue;
+				
+				if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor())
+				{
+					amtOfPawns ++;
+				}
+				
+			}
+			
+			return amtOfPawns > 1;
+	}
+		
 }

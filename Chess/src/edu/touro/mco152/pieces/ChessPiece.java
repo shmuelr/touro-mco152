@@ -1,7 +1,8 @@
 package edu.touro.mco152.pieces;
 
 
-public abstract class ChessPiece implements Comparable<ChessPiece>{	
+public abstract class ChessPiece implements Comparable<ChessPiece>{
+	
 
 	
 	public static enum PieceColor {
