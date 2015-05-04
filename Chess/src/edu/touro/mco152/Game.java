@@ -3,6 +3,7 @@ package edu.touro.mco152;
 import java.awt.Window.Type;
 
 import edu.touro.mco152.pieces.ChessPiece;
+import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 import edu.touro.mco152.pieces.Pawn;
 
 
@@ -46,7 +47,7 @@ public class Game {
 			return MOVE_ERROR_PIECE_IN_DESTINATION;
 				
 		// Last check if the move is valid for the selected piece
-		//if(!board.isValidMove(from, to)) return MOVE_ERROR_INVALID_MOVE;
+		if(!isValidMove(board.getPiece(from), to)) return MOVE_ERROR_INVALID_MOVE;
 
         board.movePiece(from, to);
         return MOVE_SUCCESS;
@@ -66,7 +67,7 @@ public class Game {
 			
 			if(piece.getClass() == Pawn.class){
 
-				if(areMultiplePawnsOnColumn(position)){
+				if(areMultiplePawnsOnColumn(position, piece.getColor() )){
 					value =  piece.getValue() -.5;
 				}
 					
@@ -79,20 +80,19 @@ public class Game {
 	}
 		
     // Move to Game Logic
-    private boolean areMultiplePawnsOnColumn(Position position){
+    private boolean areMultiplePawnsOnColumn(Position position, PieceColor color){
 			int amtOfPawns = 0;
-			final int COLUMN = position.getX();
+			final int COLUMN = position.getX();			
 			
-			
-			
-			for (int y = 0; y < DEFAULT_BOARD_SIZE; y++){
+			for (int y = 0; y < Board.DEFAULT_BOARD_SIZE; y++){
 				
-				position.
+				position.setX(COLUMN);
+				position.setY(y);
 				
 				// Continue if it is null
 				if(board.getPiece(position) == null) continue;
 				
-				if(pieces[COLUMN][y].getType() == Type.PAWN && pieces[COLUMN][y].getColor() == piece.getColor())
+				if(board.getPiece(position).getClass() == Pawn.class && board.getPiece(position).getColor() == color)
 				{
 					amtOfPawns ++;
 				}
@@ -100,6 +100,28 @@ public class Game {
 			}
 			
 			return amtOfPawns > 1;
+	}
+    
+    
+	// Move to Game Logic
+	public double getBoardStrength(PieceColor color){
+		double strength = 0;
+		Position currenPiecePos;
+		
+		for (int i = 0; i <  Board.DEFAULT_BOARD_SIZE;; i++){
+			for (int j = 0; j <  Board.DEFAULT_BOARD_SIZE;; j++){
+				
+				if(currenPiecePos==null)currenPiecePos = new P
+				
+				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
+				{
+					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));					
+					
+				}
+			}
+		}
+		
+		return strength;
 	}
 		
 }

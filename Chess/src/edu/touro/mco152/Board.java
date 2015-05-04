@@ -102,25 +102,7 @@ public class Board {
 		Collections.sort(chessPiecesByColor);
 			
 		return chessPiecesByColor;
-	}
-	
-	// Move to Game Logic
-	public double getBoardStrength(PieceColor color){
-		double strength = 0;
-		
-		for (int i = 0; i < DEFAULT_BOARD_SIZE; i++){
-			for (int j = 0; j < DEFAULT_BOARD_SIZE; j++){
-				if(pieces[i][j] != null && pieces[i][j].getColor() == color)
-				{
-					strength += getValueOfPieceAtPosition(Position.buildPostionFromXYCoords(i, j));					
-					
-				}
-			}
-		}
-		
-		return strength;
-	}
-	
+	}	
 	
 	public int getAmtOfPieces(){
 		return getListOfPieces().size();
@@ -179,74 +161,7 @@ public class Board {
 	}	
 	
 	
-	/**
-	 * Method to determine if the attempted move is a valid move or not
-	 * 
-	 * returns a boolean whether the move is valid
-	 * 
-	 * this method should have serious tests 
-	 */
-	// Move to Game Logic
-	private boolean isValidMove(Position from, Position to) {
-		ChessPiece pieceToMove = pieces[from.getX()][from.getY()];
-		if(pieceToMove.getType() == Type.KING){
-			
-			// A King can only move one space in any direction
-			if(absDistanceBetweenTwoPoints(from.getX(),to.getX()) > 1 || absDistanceBetweenTwoPoints(from.getY(),to.getY()) > 1) return false;
-			
-		}else if (pieceToMove.getType() == Type.ROOK){
-			
-			// A Rook can only move horizontally or vertically
-			if(from.getX() != to.getX() && from.getY() != to.getY()) return false;
-			
-			/**
-			 * TODO - Implement castling over here
-			 * https://en.wikipedia.org/wiki/Castling
-			 * Castling is an edge case, maybe just check by hand?
-			 */
-
-			// A Rook cannot jump over another piece
-			// If x's are equal we are moving along that x axis ie moving up or down a column
-			if(from.getX() == to.getX()){
-				if (existsPieceOnColumnBetweenTwoPoints(from.getX(), from.getY(), to.getY())) return false;
-			}
-			// If y's are equal we are moving across that y axis ie moving across a row
-			if (from.getY() == to.getY()){
-				if (existsPieceOnRowBetweenTwoPoints(from.getY(), from.getX(), to.getX())) return false;
-			}
-			
-		}else if (pieceToMove.getType() == Type.BISHOP){
-			
-			// Should be pretty simple to implement
-			// Just need to verify that the positions are on the same diagonal and that there are no pieces in between
-			
-		}else if (pieceToMove.getType() == Type.QUEEN){
-			
-			// Need to verify that the pieces are either on the same row, column or diagonal
-			// Need to make sure there are no pieces in between.
-			
-		}else if (pieceToMove.getType() == Type.PAWN){
-			
-			// Usually it can only move on space forward
-			// Except:
-			//		First move can move 2 spaces forward
-			//		Can kill an enemy piece by moving diagonal
-			//		En Passant https://en.wikipedia.org/wiki/En_passant this will be tricky... ugh
-			//			- we may have to keep a history of piece moves for this..
-			//				- truth is we should have a history of moves anyways so that we can print out the result at the end of the game
-			//				- Where should the history be kept? In the board class? In application class? Is it related to the board? I guess it is..
-			//				  The current board is really just a history of the board moves. It may make sense to store the moves with the board
-			//				  There should probably be a Move class to make it easy to store this data. We can use a List<Move> to keep track of this.
-			
-		}else if (pieceToMove.getType() == Type.KNIGHT){
-			
-			// Moves in a unique pattern and jumps over pieces in the way
-			// Should be pretty easy to implement
-			
-		}
-		
-		return true;
-	}
+	
 	
 	// Move to Game Logic
 	private int absDistanceBetweenTwoPoints(int x1, int x2)

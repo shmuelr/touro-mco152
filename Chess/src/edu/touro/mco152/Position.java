@@ -14,6 +14,10 @@ public class Position {
 		this.y = y;
 	}
 	
+	public Position(){
+		
+	}
+	
 	
 	public static Position buildPostionFromChessCoords(char charX, int initialY){
 		
