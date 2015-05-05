@@ -1,24 +1,23 @@
 package edu.touro.mco152.pieces;
 
-import edu.touro.mco152.Position;
 
-public class Pawn extends ChessPieceAbsClass {
+public class Knight extends ChessPieceAbsClass {
 
 	
 	
-	private Pawn(){
+	private Knight(){
 		// Lock down default constructor
 	}
 	
-	public static Pawn buildPawn(PieceColor color){
-		Pawn pawn = new Pawn();
-		pawn.color = color;
+	public static Knight buildPawn(PieceColor color){
+		Knight piece = new Knight();
+		piece.color = color;
 		
-		pawn.pieceChar = pawn.isWhite() ? 
+		piece.pieceChar = piece.isWhite() ? 
 				Character.toUpperCase(PieceConstants.PAWN_CHAR) : 
 					Character.toLowerCase(PieceConstants.PAWN_CHAR);
 		
-		return pawn;
+		return piece;
 	}
 	
 	

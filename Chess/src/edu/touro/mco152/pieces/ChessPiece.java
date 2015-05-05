@@ -3,12 +3,7 @@ package edu.touro.mco152.pieces;
 
 public class ChessPiece implements Comparable<ChessPiece>{
 	
-	public static double PAWN_VALUE 	= 1.0;
-	public static double KNIGHT_VALUE 	= 2.5;
-	public static double BISHOP_VALUE 	= 3.0;
-	public static double ROOK_VALUE 	= 5.0;
-	public static double QUEEN_VALUE 	= 9.0;
-	public static double KING_VALUE 	= 0.0;
+	
 	
 	
 	public static enum Type{
@@ -90,30 +85,7 @@ public class ChessPiece implements Comparable<ChessPiece>{
 	}
 	
 	
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof ChessPiece){
-			return obj.toString().equals(this.toString());
-		}
-		return false;
-	}
-
-	@Override
-	public int compareTo(ChessPiece that) 
-	{
-		final int LESS = -1;
-	    final int EQUAL = 0;
-	    final int GREATER = 1;
-		
-		if(this.getValue() > that.getValue()){
-			return GREATER;
-		}
-		if (this.getValue() < that.getValue()){
-			return LESS;
-		}
-		
-		return EQUAL;
-	}
+	
 
 
 	
