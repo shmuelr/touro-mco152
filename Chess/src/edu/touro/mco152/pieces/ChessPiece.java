@@ -3,72 +3,34 @@ package edu.touro.mco152.pieces;
 
 public class ChessPiece implements Comparable<ChessPiece>{
 	
-	public static double PAWN_VALUE 	= 1.0;
-	public static double KNIGHT_VALUE 	= 2.5;
-	public static double BISHOP_VALUE 	= 3.0;
-	public static double ROOK_VALUE 	= 5.0;
-	public static double QUEEN_VALUE 	= 9.0;
-	public static double KING_VALUE 	= 0.0;
-	
-	
-	public static enum Type{
-		PAWN('P', PAWN_VALUE), KNIGHT('N', KNIGHT_VALUE), BISHOP('B', BISHOP_VALUE), ROOK('R', ROOK_VALUE), QUEEN('Q', QUEEN_VALUE), KING('K', KING_VALUE);
-		
-		private char representation;
-		private double value;
-		
-		Type(char representation, double value){
-			this.representation = representation;
-			this.value = value;
-		}
-		
-		public double getValue(){
-			return value;
-		}
-	}
-	
 	
 	public static enum PieceColor {
 		BLACK, WHITE
 	}
 	
-	
-	
-	
-			
+	private double value;
+	private char represenation;
 			
 	protected final PieceColor color;
-	private final Type type;
-	private final char pieceChar;
 	
 	
-	public ChessPiece(Type type, PieceColor color){
-		this.type = type;
+	public ChessPiece(PieceColor color){
 		this.color = color;
-		pieceChar = isWhite() ? 
-				Character.toUpperCase(type.representation) : 
-					Character.toLowerCase(type.representation);
-		}
-	
-	 public static ChessPiece buildNewPiece(Type type, PieceColor color)
-	 {
-		 return new ChessPiece(type, color);
-	 }
+	}
 
 	
 	public PieceColor getColor()
 	{
 		return color;
 	}
-
-	public Type getType() 
-	{
-		return type;
+	
+	public void setValue(double set) {
+		value = set;
 	}
 	
 	public double getValue()
 	{
-		return type.getValue();
+		return value;
 	}
 	
 	public boolean isWhite(){
@@ -88,7 +50,40 @@ public class ChessPiece implements Comparable<ChessPiece>{
 	@Override
 	public String toString() 
 	{
-		return Character.toString(pieceChar);
+		return Character.toString(this.represenation);
+		}
+	
+	public void setRepresentationAndValue() {
+	
+	if (this.getClass()==Queen.class) {
+		represenation='q';
+		value=9;
+	}
+	else if (this.getClass()==King.class) {
+		represenation='k';
+		value=0;
+	}
+	else if (this.getClass()==Knight.class) { 
+		represenation='n';
+		value = 2.5;
+	}
+	else if (this.getClass()==Rook.class) {
+		represenation='r';
+		value=5;
+	}
+	else if (this.getClass()==Bishop.class) {
+		represenation='b';
+		value=3;
+	}
+	else if (this.getClass()==Pawn.class) {
+		this.represenation='p';
+		value=1;
+	}
+	else {
+		this.represenation=' ';
+	}
+	if (this.isWhite())
+		this.represenation = Character.toUpperCase(this.represenation);
 	}
 	
 	

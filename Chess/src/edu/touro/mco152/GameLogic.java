@@ -1,8 +1,13 @@
 package edu.touro.mco152;
 
+import edu.touro.mco152.pieces.Bishop;
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+import edu.touro.mco152.pieces.King;
+import edu.touro.mco152.pieces.Knight;
+import edu.touro.mco152.pieces.Pawn;
+import edu.touro.mco152.pieces.Queen;
+import edu.touro.mco152.pieces.Rook;
 
 public class GameLogic {
 
@@ -38,27 +43,14 @@ public class GameLogic {
 		return strength;
 	}
 
-	// Move to Game Logic
 	private double getValueOfPieceAtPosition(Position position) {
-		double value = 0;
-
-		if (pieces[position.getX()][position.getY()].getType() == Type.PAWN) {
-
-			if (areMultiplePawnsOnColumn(position)) {
-				value = ChessPiece.PAWN_VALUE - .5;
-			} else {
-				value = ChessPiece.PAWN_VALUE;
-			}
-
-		} else {
-
-			value = pieces[position.getX()][position.getY()].getValue();
-		}
-
-		return value;
+		ChessPiece pieceBox = pieces[position.getX()][position.getY()];
+		if (pieceBox.getClass() == Pawn.class && areMultiplePawnsOnColumn(position))
+			return pieceBox.getValue() - .5;
+		 else
+			return pieceBox.getValue();
 	}
 
-	// Move to Game Logic
 	private boolean areMultiplePawnsOnColumn(Position position) {
 		int amtOfPawns = 0;
 		final int COLUMN = position.getX();
@@ -71,7 +63,7 @@ public class GameLogic {
 			if (pieces[COLUMN][y] == null)
 				continue;
 
-			if (pieces[COLUMN][y].getType() == Type.PAWN
+			if (pieces[COLUMN][y].getClass() == Pawn.class
 					&& pieces[COLUMN][y].getColor() == piece.getColor()) {
 				amtOfPawns++;
 			}
@@ -81,24 +73,20 @@ public class GameLogic {
 		return amtOfPawns > 1;
 	}
 
-	// Move to Game Logic
 	public int movePiece(char x1, int y1, char x2, int y2) {
 
 		return movePiece(Position.buildPostionFromChessCoords(x1, y1),
 				Position.buildPostionFromChessCoords(x2, y2));
 	}
 
-	// Move to Game Logic
 	private boolean isValidPostion(Position position) {
 		return (position.getX() >= 0 && position.getY() < Board.DEFAULT_BOARD_SIZE);
 	}
 
-	// Move to Game Logic
 	private boolean isPositionOccupied(Position position) {
 		return pieces[position.getX()][position.getY()] != null;
 	}
 
-	// Move to Game Logic
 	private int movePiece(Position from, Position to) {
 
 		// First check if the locations are valid so we don't crash the program
@@ -133,20 +121,20 @@ public class GameLogic {
 	 * 
 	 * this method should have serious tests
 	 */
-	// Move to Game Logic
+
 	private boolean isValidMove(Position from, Position to) {
 		ChessPiece pieceToMove = pieces[from.getX()][from.getY()];
-		if (pieceToMove.getType() == Type.KING) {
+		if (pieceToMove.getClass() == King.class) {
 
 			// A King can only move one space in any direction
 			if (absDistanceBetweenTwoPoints(from.getX(), to.getX()) > 1
 					|| absDistanceBetweenTwoPoints(from.getY(), to.getY()) > 1)
 				return false;
 
-		} else if (pieceToMove.getType() == Type.ROOK) {
+		} else if (pieceToMove.getClass() == Rook.class) {
 
 			// A Rook can only move horizontally or vertically
-			if (from.getX() != to.getX() && from.getY() != to.getY())
+			if (!isStreight(from, to))
 				return false;
 
 			/**
@@ -155,33 +143,30 @@ public class GameLogic {
 			 * maybe just check by hand?
 			 */
 
-			// A Rook cannot jump over another piece
-			// If x's are equal we are moving along that x axis ie moving up or
-			// down a column
-			if (from.getX() == to.getX()) {
-				if (existsPieceBetweenTwoPoints(from, to))
-					return false;
-			}
-			// If y's are equal we are moving across that y axis ie moving
-			// across a row
-			if (from.getY() == to.getY()) {
-				if (existsPieceBetweenTwoPoints(from, to))
-					return false;
-			}
+			// this method automatically picks right points to check
+			if (existsPieceBetweenTwoPoints(from, to))
+				return false;
 
-		} else if (pieceToMove.getType() == Type.BISHOP) {
+		} else if (pieceToMove.getClass() == Bishop.class) {
 
 			// Should be pretty simple to implement
 			// Just need to verify that the positions are on the same diagonal
 			// and that there are no pieces in between
-
-		} else if (pieceToMove.getType() == Type.QUEEN) {
+			if (! (isDiagonal(to,from)))
+				return false;
+			if (existsPieceBetweenTwoPoints(to,from))
+				return false;
+		} else if (pieceToMove.getClass() == Queen.class) {
 
 			// Need to verify that the pieces are either on the same row, column
 			// or diagonal
 			// Need to make sure there are no pieces in between.
+			if (! ( isDiagonal(to, from) || isStreight(to, from) )  )
+				return false;
+			if (existsPieceBetweenTwoPoints(to, from))
+				return false;
 
-		} else if (pieceToMove.getType() == Type.PAWN) {
+		} else if (pieceToMove.getClass() == Pawn.class) {
 
 			// Usually it can only move on space forward
 			// Except:
@@ -199,7 +184,7 @@ public class GameLogic {
 			// There should probably be a Move class to make it easy to store
 			// this data. We can use a List<Move> to keep track of this.
 
-		} else if (pieceToMove.getType() == Type.KNIGHT) {
+		} else if (pieceToMove.getClass() == Knight.class) {
 
 			// Moves in a unique pattern and jumps over pieces in the way
 			// Should be pretty easy to implement
@@ -209,12 +194,10 @@ public class GameLogic {
 		return true;
 	}
 
-	// Move to Game Logic
 	private int absDistanceBetweenTwoPoints(int x1, int x2) {
 		return Math.abs(x1 - x2);
 	}
 
-	// Move to Game Logic
 	private boolean existsPieceBetweenTwoPoints(Position p1, Position p2) {
 		int x1 = p1.getX(), y1 = p1.getY(), x2 = p2.getX(), y2 = p2.getY();
 		if (x1 == x2)
@@ -227,22 +210,30 @@ public class GameLogic {
 				if (pieces[i][y1] != null)
 					return true;
 			}
-		if (Math.abs(y1-y2)==Math.abs(x1-x2)) {
-			int[] slopeArray = getSlopeArray(p1,p2);
-			boolean p1IsLower=(y1<y2);
-			for (int x = x1, y =y1; (p1IsLower)?y1<y2 : y1>y2; x+=slopeArray[0],y+=slopeArray[1])
-				if (pieces[x][y]!=null)
+		if (Math.abs(y1 - y2) == Math.abs(x1 - x2)) {
+			int[] slopeArray = getSlopeArray(p1, p2);
+			boolean p1IsLower = (y1 < y2);
+			for (int x = x1, y = y1; (p1IsLower) ? y1 < y2 : y1 > y2; x += slopeArray[0], y += slopeArray[1])
+				if (pieces[x][y] != null)
 					return true;
 		}
 		return false;
 	}
-	
-	//this method returns an array to help iterate diagonal checks.
+
+	// this method returns an array to help iterate diagonal checks.
 	private int[] getSlopeArray(Position p1, Position p2) {
-		int[] slopeArray= new int[2];
-		slopeArray[0]= (p1.getX()<p2.getX())? 1 : -1;
-		slopeArray[1]= (p1.getY()<p2.getY())? 1 : -1;
+		int[] slopeArray = new int[2];
+		slopeArray[0] = (p1.getX() < p2.getX()) ? 1 : -1;
+		slopeArray[1] = (p1.getY() < p2.getY()) ? 1 : -1;
 		return slopeArray;
+	}
+
+	public boolean isDiagonal(Position p1, Position p2) {
+		return (Math.abs( p1.getY() - p2.getY() ) == Math.abs( p1.getX()- p2.getX() ) );
+	}
+ 
+	private boolean isStreight(Position p1, Position p2) {
+		return (p1.getX() == p2.getX() || p1.getY() == p2.getY());
 	}
 
 	/**
@@ -254,7 +245,7 @@ public class GameLogic {
 	 * enemy pieces and check if they can move to the given square
 	 * 
 	 */
-	// Move to Game Logic
+
 	private boolean isSquareThreatedBy(PieceColor color, int x, int y) {
 
 		return false;

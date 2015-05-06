@@ -11,8 +11,8 @@ import org.junit.Test;
 import edu.touro.mco152.Board;
 import edu.touro.mco152.GameLogic;
 import edu.touro.mco152.pieces.ChessPiece;
-import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+import edu.touro.mco152.pieces.*;
+import edu.touro.mco152.pieces.ChessPiece.*;
 
 public class BoardTest {
 	
@@ -23,130 +23,7 @@ public class BoardTest {
 		assertTrue(board != null);
 	}
 	
-	@Test
-	public void testMovingKing() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK), 'd',2);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 3) == testLogic.MOVE_SUCCESS);
-	}
-	
-	@Test
-	public void testMovingKingError() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK), 'd',2);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 4) == testLogic.MOVE_ERROR_INVALID_MOVE);
-	}
-	
-	@Test
-	public void testMovingQueen() {
-		//TODO fill in
-	}
-	
-	@Test
-	public void testMovingBishop() {
-		//TODO fill in
-	}
-	@Test
-	public void testMovingKnight() {
-		//TODO fill in
-	}
-	
-	@Test
-	public void testMovingRook() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_SUCCESS);
-	}
-	
-	@Test
-	public void testMovingRook2() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.WHITE), 'd',6);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_SUCCESS);
-	}
-	
-	@Test
-	public void testMovingRookError() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		assertTrue(testLogic.movePiece('d', 2, 'a', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
-	}
-	
-	@Test
-	public void testMovingRookError2() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.BLACK), 'd',3);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
-	}
-	
-	@Test
-	public void testMovingRookError3() {
-		Board board = new Board();
-		GameLogic testLogic = new GameLogic(board);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.WHITE), 'd',5);
-		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
-	}
-	
-	@Test
-	public void testMovingPawn() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		assertTrue(testLogic.movePiece('a', 2, 'a', 3) == testLogic.MOVE_SUCCESS);
-	}
-	
-	@Test
-	public void testMovingPawnDoubleSpace() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		assertTrue(testLogic.movePiece('a', 2, 'a', 4) == testLogic.MOVE_SUCCESS);
-	}
-	
-	@Test
-	public void testMovingPawnNoDoubleSpace() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		testLogic.movePiece('a', 2, 'a', 3);
-		assertTrue(testLogic.movePiece('a', 3, 'a', 5) == testLogic.MOVE_ERROR_INVALID_MOVE);
-	}
-	
-	@Test
-	public void testBoardStrength() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == testLogic.getBoardStrength(PieceColor.BLACK));
-	}
-	
-	
-	@Test
-	public void testBoardStrengthByValue() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == 38.0);
-	}
-	
-	@Test
-	public void testBoardStrengthPawnOverlap() {
-		Board board = new Board();
-		board.setupBoard();
-		GameLogic testLogic = new GameLogic(board);
-		testLogic.movePiece('a', 2, 'b', 3);
-		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == 37.0);
-	}
-	
+
 	@Test
 	public void testBoardGetListPiecesForColor() {
 		Board board = new Board();
@@ -161,8 +38,8 @@ public class BoardTest {
 		board.setupBoard();
 		List<ChessPiece> listOfBlackPieces = board.getListOfPieces(PieceColor.BLACK);
 		
-		// The king should be first because it has the lowest value
-		assertTrue(listOfBlackPieces.get(0).equals(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK)));
+		// The King should be first because it has the lowest value
+		assertTrue(listOfBlackPieces.get(0).equals(new King(PieceColor.BLACK)));
 	}
 
 	
@@ -177,7 +54,7 @@ public class BoardTest {
 	public void testSizeCountWhenAddPieceToBoard() {
 		Board board = new Board();
 		int boardSize = board.getAmtOfPieces();
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
+		board.addPieceToBoard(new Pawn(PieceColor.BLACK), 'a', 1);
 		assertEquals(boardSize+1, board.getAmtOfPieces());
 	}
 	
@@ -200,7 +77,7 @@ public class BoardTest {
 	public void testCountSpecificPieces(){
 		Board board = new Board();
 		board.setupBoard();
-		assertEquals(2, board.getAmtOfSpecificPiece(ChessPiece.buildNewPiece(Type.BISHOP, PieceColor.BLACK)));
+		assertEquals(2, board.getAmtOfSpecificPiece(new Bishop(PieceColor.BLACK)));
 	}
 	
 	@Test
@@ -208,14 +85,14 @@ public class BoardTest {
 		Board board = new Board();
 		board.setupBoard();
 
-		assertEquals(ChessPiece.buildNewPiece(Type.BISHOP, PieceColor.BLACK), board.getPiece('c', 8));
+		assertEquals(new Bishop(PieceColor.BLACK), board.getPiece('c', 8));
 	}
 	
 	@Test
 	public void testBoardPrintWhenAddPieceToBoard() {
 		Board board = new Board();
 		
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 2);
+		board.addPieceToBoard(new Pawn (PieceColor.BLACK), 'a', 2);
 		
 		String boardPrintOut = board.printBoard();
 		String excpectedOutPut = 
@@ -235,14 +112,14 @@ public class BoardTest {
 	@Test
 	public void testAddPieceToBoardWithConflict() {
 		Board board = new Board();
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
-		assertFalse(board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1));
+		board.addPieceToBoard(new Pawn(PieceColor.BLACK), 'a', 1);
+		assertFalse(board.addPieceToBoard(new Pawn (PieceColor.BLACK), 'a', 1));
 	}
 	
 	@Test
 	public void testRemovePieceFromBoard() {
 		Board board = new Board();
-		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK), 'a', 1);
+		board.addPieceToBoard(new Pawn(PieceColor.BLACK), 'a', 1);
 		assertTrue(board.removePieceFromBoard('a', 1));
 	}
 	

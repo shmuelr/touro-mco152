@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
+import edu.touro.mco152.pieces.Pawn;
 
 public class PawnTest {
 
@@ -33,13 +33,13 @@ public class PawnTest {
 	@Test
 	public void test() {
 		//fail("Not yet implemented");
-		ChessPiece p = ChessPiece.buildNewPiece(Type.PAWN,PieceColor.WHITE);
+		ChessPiece p = new Pawn(PieceColor.WHITE);
 		assertTrue(p.isWhite());
 	}
 	
 	@Test
 	public void testBlackConstruct() {
-		ChessPiece p = ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
+		ChessPiece p = new Pawn(PieceColor.BLACK);
 		assertTrue(p.isBlack());
 	}
 	

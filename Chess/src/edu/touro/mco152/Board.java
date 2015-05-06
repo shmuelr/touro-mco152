@@ -7,9 +7,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import edu.touro.mco152.pieces.ChessPiece;
+import edu.touro.mco152.pieces.*;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
-import edu.touro.mco152.pieces.ChessPiece.Type;
 
 public class Board {
 
@@ -48,18 +47,18 @@ public class Board {
 	public ChessPiece generatePiece(char c) {
 		
 		switch(c) {
-			case 'P': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.WHITE);
-			case 'p': return ChessPiece.buildNewPiece(Type.PAWN,PieceColor.BLACK);
-			case 'R': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.WHITE);
-			case 'r': return ChessPiece.buildNewPiece(Type.ROOK,PieceColor.BLACK);
-			case 'N': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.WHITE);
-			case 'n': return ChessPiece.buildNewPiece(Type.KNIGHT,PieceColor.BLACK);
-			case 'B': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.WHITE);
-			case 'b': return ChessPiece.buildNewPiece(Type.BISHOP,PieceColor.BLACK);
-			case 'K': return ChessPiece.buildNewPiece(Type.KING,PieceColor.WHITE);
-			case 'k': return ChessPiece.buildNewPiece(Type.KING,PieceColor.BLACK);
-			case 'Q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.WHITE);
-			case 'q': return ChessPiece.buildNewPiece(Type.QUEEN,PieceColor.BLACK);
+			case 'P': return new Pawn(PieceColor.WHITE);
+			case 'p': return new Pawn(PieceColor.BLACK);
+			case 'R': return new Rook(PieceColor.WHITE);
+			case 'r': return new Rook(PieceColor.BLACK);
+			case 'N': return new Knight(PieceColor.WHITE);
+			case 'n': return new Knight(PieceColor.BLACK);
+			case 'B': return new Bishop(PieceColor.WHITE);
+			case 'b': return new Bishop(PieceColor.BLACK);
+			case 'K': return new King(PieceColor.WHITE);
+			case 'k': return new King(PieceColor.BLACK);
+			case 'Q': return new Queen(PieceColor.WHITE);
+			case 'q': return new Queen(PieceColor.BLACK);
 			default: return null;
 		}
 	}
