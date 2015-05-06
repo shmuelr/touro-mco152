@@ -1,19 +1,35 @@
 package edu.touro.mco152.pieces;
 
-import edu.touro.mco152.Position;
+import edu.touro.mco152.game.Position;
 
-public abstract class ChessPieceAbsClass implements Comparable<ChessPieceAbsClass>{
+public abstract class AbstractChessPiece implements Comparable<AbstractChessPiece>{
 
-	protected char pieceChar;
-	protected PieceColor color;
+	private char pieceChar;
+	private PieceColor color;
 	
-	public abstract boolean	canJumpOverPieces();
+	
+	private double value;
+	private boolean wasMoved = false;
+	
+	public AbstractChessPiece(double value, PieceColor color, char pieceChar) {
+		this.value = value;
+		this.color = color;
+		this.pieceChar = pieceChar;
+	}
+	
 	public abstract boolean  isValidMove(Position from, Position to);
 	
 	
+	
+	public boolean wasMoved() {
+		return wasMoved;
+	}
+	public void setMoved() {
+		this.wasMoved = true;
+	}
 
 	public double getValue() {
-		return PieceConstants.PAWN_VALUE;
+		return value;
 	}
 
 
@@ -21,6 +37,9 @@ public abstract class ChessPieceAbsClass implements Comparable<ChessPieceAbsClas
 		return pieceChar;
 	}
 
+	public PieceColor getColor() {
+		return color;
+	}
 
 	public boolean isWhite() {
 		return color.equals(PieceColor.WHITE);
@@ -38,9 +57,10 @@ public abstract class ChessPieceAbsClass implements Comparable<ChessPieceAbsClas
 		return Character.toString(pieceChar);
 	}
 	
+	// Not sure if this will be good. Should pawns be equal to each other?
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof ChessPiece){
+		if(obj instanceof AbstractChessPiece){
 			return obj.toString().equals(this.toString());
 		}
 		return false;
@@ -49,7 +69,7 @@ public abstract class ChessPieceAbsClass implements Comparable<ChessPieceAbsClas
 
 	
 	@Override
-	public int compareTo(ChessPieceAbsClass that) 
+	public int compareTo(AbstractChessPiece that) 
 	{
 		final int LESS = -1;
 	    final int EQUAL = 0;
@@ -64,5 +84,7 @@ public abstract class ChessPieceAbsClass implements Comparable<ChessPieceAbsClas
 		
 		return EQUAL;
 	}
+
+	
 	
 }

@@ -1,4 +1,4 @@
-package edu.touro.mco152;
+package edu.touro.mco152.game;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +14,15 @@ public class Position {
 		this.y = y;
 	}
 	
+	public static Position buildPostionFromChessCoords(String coards){
+		return buildPostionFromChessCoords(coards.charAt(0), Character.getNumericValue(coards.charAt(1)));
+	}
+	
 	
 	public static Position buildPostionFromChessCoords(char charX, int initialY){
 		
 		int x = Character.toLowerCase(charX) - 'a';
-		int y = Board.DEFAULT_BOARD_SIZE - initialY;
+		int y = Game.Constants.DEFAULT_BOARD_SIZE - initialY;
 		
 		return getPostion(x, y);
 	}

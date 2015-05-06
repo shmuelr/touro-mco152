@@ -1,31 +1,26 @@
 package edu.touro.mco152.pieces;
 
+import edu.touro.mco152.game.Position;
 
-public class Knight extends ChessPieceAbsClass {
+
+public class Knight extends AbstractChessPiece {
 
 	
 	
-	private Knight(){
-		// Lock down default constructor
+	private Knight(PieceColor color, char pieceChar){
+		super(PieceConstants.KNIGHT_VALUE, color, pieceChar);
 	}
 	
-	public static Knight buildPawn(PieceColor color){
-		Knight piece = new Knight();
-		piece.color = color;
+	public static Knight buildKnight(PieceColor color){
+
+		char pieceChar = 
+				color == PieceColor.WHITE ? 
+				Character.toUpperCase(PieceConstants.KNIGHT_CHAR) : 
+			    Character.toLowerCase(PieceConstants.KNIGHT_CHAR);
 		
-		piece.pieceChar = piece.isWhite() ? 
-				Character.toUpperCase(PieceConstants.PAWN_CHAR) : 
-					Character.toLowerCase(PieceConstants.PAWN_CHAR);
-		
-		return piece;
+		return  new Knight(color, pieceChar);
 	}
 	
-	
-	
-	@Override
-	public boolean canJumpOverPieces() {
-		return false;
-	}
 
 	@Override
 	public boolean isValidMove(Position from, Position to) {

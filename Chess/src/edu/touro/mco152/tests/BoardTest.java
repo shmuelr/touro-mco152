@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import edu.touro.mco152.Board;
+import edu.touro.mco152.game.Board;
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 import edu.touro.mco152.pieces.ChessPiece.Type;

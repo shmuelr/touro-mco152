@@ -1,37 +1,34 @@
 package edu.touro.mco152.pieces;
 
-import edu.touro.mco152.Position;
+import edu.touro.mco152.game.Position;
 
-public class Pawn extends ChessPieceAbsClass {
+
+
+public class Pawn extends AbstractChessPiece {
 
 	
 	
-	private Pawn(){
-		// Lock down default constructor
+	private Pawn(PieceColor color, char pieceChar){
+		super(PieceConstants.PAWN_VALUE, color, pieceChar);
 	}
 	
 	public static Pawn buildPawn(PieceColor color){
-		Pawn pawn = new Pawn();
-		pawn.color = color;
+	
 		
-		pawn.pieceChar = pawn.isWhite() ? 
+		char pieceChar = 
+				color == PieceColor.WHITE ? 
 				Character.toUpperCase(PieceConstants.PAWN_CHAR) : 
-					Character.toLowerCase(PieceConstants.PAWN_CHAR);
+				Character.toLowerCase(PieceConstants.PAWN_CHAR);
 		
-		return pawn;
+		return  new Pawn(color, pieceChar);
 	}
 	
-	
-	
-	@Override
-	public boolean canJumpOverPieces() {
-		return false;
-	}
 
 	@Override
 	public boolean isValidMove(Position from, Position to) {
-		// TODO Auto-generated method stub
-		return false;
+
+		
+		return true;
 	}
 
 	
