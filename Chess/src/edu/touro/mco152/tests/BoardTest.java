@@ -5,14 +5,17 @@ import static org.junit.Assert.*;
 import java.awt.GraphicsDevice.WindowTranslucency;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import edu.touro.mco152.Board;
+import edu.touro.mco152.GameLogic;
 import edu.touro.mco152.pieces.ChessPiece;
 import edu.touro.mco152.pieces.ChessPiece.PieceColor;
 import edu.touro.mco152.pieces.ChessPiece.Type;
 
 public class BoardTest {
+	
 
 	@Test
 	public void testCreateBoard() {
@@ -23,15 +26,17 @@ public class BoardTest {
 	@Test
 	public void testMovingKing() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK), 'd',2);
-		assertTrue(board.movePiece('d', 2, 'd', 3) == Board.MOVE_SUCCESS);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 3) == testLogic.MOVE_SUCCESS);
 	}
 	
 	@Test
 	public void testMovingKingError() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.KING, PieceColor.BLACK), 'd',2);
-		assertTrue(board.movePiece('d', 2, 'd', 4) == Board.MOVE_ERROR_INVALID_MOVE);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 4) == testLogic.MOVE_ERROR_INVALID_MOVE);
 	}
 	
 	@Test
@@ -51,68 +56,77 @@ public class BoardTest {
 	@Test
 	public void testMovingRook() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		assertTrue(board.movePiece('d', 2, 'd', 6) == Board.MOVE_SUCCESS);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_SUCCESS);
 	}
 	
 	@Test
 	public void testMovingRook2() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.WHITE), 'd',6);
-		assertTrue(board.movePiece('d', 2, 'd', 6) == Board.MOVE_SUCCESS);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_SUCCESS);
 	}
 	
 	@Test
 	public void testMovingRookError() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
-		assertTrue(board.movePiece('d', 2, 'a', 6) == Board.MOVE_ERROR_INVALID_MOVE);
+		assertTrue(testLogic.movePiece('d', 2, 'a', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
 	}
 	
 	@Test
 	public void testMovingRookError2() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.BLACK), 'd',3);
-		assertTrue(board.movePiece('d', 2, 'd', 6) == Board.MOVE_ERROR_INVALID_MOVE);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
 	}
 	
 	@Test
 	public void testMovingRookError3() {
 		Board board = new Board();
+		GameLogic testLogic = new GameLogic(board);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.ROOK, PieceColor.BLACK), 'd',2);
 		board.addPieceToBoard(ChessPiece.buildNewPiece(Type.PAWN, PieceColor.WHITE), 'd',5);
-		assertTrue(board.movePiece('d', 2, 'd', 6) == Board.MOVE_ERROR_INVALID_MOVE);
+		assertTrue(testLogic.movePiece('d', 2, 'd', 6) == testLogic.MOVE_ERROR_INVALID_MOVE);
 	}
 	
 	@Test
 	public void testMovingPawn() {
 		Board board = new Board();
 		board.setupBoard();
-		assertTrue(board.movePiece('a', 2, 'a', 3) == Board.MOVE_SUCCESS);
+		GameLogic testLogic = new GameLogic(board);
+		assertTrue(testLogic.movePiece('a', 2, 'a', 3) == testLogic.MOVE_SUCCESS);
 	}
 	
 	@Test
 	public void testMovingPawnDoubleSpace() {
 		Board board = new Board();
 		board.setupBoard();
-		assertTrue(board.movePiece('a', 2, 'a', 4) == Board.MOVE_SUCCESS);
+		GameLogic testLogic = new GameLogic(board);
+		assertTrue(testLogic.movePiece('a', 2, 'a', 4) == testLogic.MOVE_SUCCESS);
 	}
 	
 	@Test
 	public void testMovingPawnNoDoubleSpace() {
 		Board board = new Board();
 		board.setupBoard();
-		board.movePiece('a', 2, 'a', 3);
-		assertTrue(board.movePiece('a', 3, 'a', 5) == Board.MOVE_ERROR_INVALID_MOVE);
+		GameLogic testLogic = new GameLogic(board);
+		testLogic.movePiece('a', 2, 'a', 3);
+		assertTrue(testLogic.movePiece('a', 3, 'a', 5) == testLogic.MOVE_ERROR_INVALID_MOVE);
 	}
 	
 	@Test
 	public void testBoardStrength() {
 		Board board = new Board();
 		board.setupBoard();
-		assertTrue(board.getBoardStrength(PieceColor.WHITE) == board.getBoardStrength(PieceColor.BLACK));
+		GameLogic testLogic = new GameLogic(board);
+		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == testLogic.getBoardStrength(PieceColor.BLACK));
 	}
 	
 	
@@ -120,15 +134,17 @@ public class BoardTest {
 	public void testBoardStrengthByValue() {
 		Board board = new Board();
 		board.setupBoard();
-		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 38.0);
+		GameLogic testLogic = new GameLogic(board);
+		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == 38.0);
 	}
 	
 	@Test
 	public void testBoardStrengthPawnOverlap() {
 		Board board = new Board();
 		board.setupBoard();
-		board.movePiece('a', 2, 'b', 3);
-		assertTrue(board.getBoardStrength(PieceColor.WHITE) == 37.0);
+		GameLogic testLogic = new GameLogic(board);
+		testLogic.movePiece('a', 2, 'b', 3);
+		assertTrue(testLogic.getBoardStrength(PieceColor.WHITE) == 37.0);
 	}
 	
 	@Test
