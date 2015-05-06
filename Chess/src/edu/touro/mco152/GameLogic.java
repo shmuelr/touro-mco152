@@ -205,17 +205,18 @@ public class GameLogic {
 				if (pieces[x1][i] != null)
 					return true;
 			}
-		if (y1 == y2)
+		else if (y1 == y2)
 			for (int i = Math.min(x1, x2) + 1; i < Math.max(x1, x2); i++) {
 				if (pieces[i][y1] != null)
 					return true;
 			}
-		if (isDiagonal(p1,p2)) {
+		else if (isDiagonal(p1,p2)) {
 			int[] slopeArray = getSlopeArray(p1, p2);
-			boolean p1IsLower = (y1 < y2);
-			for (int x = x1, y = y1; (p1IsLower) ? y1 < y2 : y1 > y2; x += slopeArray[0], y += slopeArray[1])
-				if (pieces[x][y] != null)
+			int xStart = x1+slopeArray[0], yStart= y1+slopeArray[1];
+			for (; (yStart<y2) ? yStart < y2 : yStart > y2; xStart += slopeArray[0], yStart += slopeArray[1]) {
+				if (pieces[xStart][yStart] != null)
 					return true;
+			}
 		}
 		return false;
 	}

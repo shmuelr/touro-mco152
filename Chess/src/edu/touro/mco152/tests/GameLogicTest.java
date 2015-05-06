@@ -60,15 +60,20 @@ public class GameLogicTest {
 	public void diagonalPieceBetweenTwoPointsTest() {
 		Position p1 = new Position(0,0);
 		Position p2 = new Position(5,5);
+		Position p3 = new Position(7,7);
 		Board board = new Board();
 		board.addPieceToBoard(new Bishop(PieceColor.BLACK), 2, 2);
 		GameLogic testLogic = new GameLogic(board);
 		System.out.println(testLogic.isDiagonal(p1, p2));
 		int[] array =testLogic.getSlopeArray(p1, p2);
+		int[] slopeArray = testLogic.getSlopeArray(p2, p3);
+		System.out.println(slopeArray[0] + " "+ slopeArray[1]);
 		System.out.println(array[0]+" "+array[1]);
 		assertTrue(testLogic.existsPieceBetweenTwoPoints(p1,p2));
+		assertFalse(testLogic.existsPieceBetweenTwoPoints(p2, p3));
+
+
 	}
-	
 
 	@Test
 	public void testMovingBishop() {
