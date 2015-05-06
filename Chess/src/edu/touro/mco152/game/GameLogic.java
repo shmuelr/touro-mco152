@@ -10,13 +10,18 @@ import edu.touro.mco152.pieces.PieceConstants;
 class GameLogic {
 
 	// Move to Game Logic
-	public double getBoardStrength(AbstractChessPiece[][] pieces, PieceColor color) {
+	public double getBoardStrength(Board board, PieceColor color) {
 		double strength = 0;
 
+		AbstractChessPiece chessPiece;
+		
 		for (int i = 0; i < Game.Constants.DEFAULT_BOARD_SIZE; i++) {
 			for (int j = 0; j < Game.Constants.DEFAULT_BOARD_SIZE; j++) {
-				if (pieces[i][j] != null && pieces[i][j].getColor() == color) {
-					strength += getValueOfPieceAtPosition(pieces,
+				
+				chessPiece = board.getPieceAtPostion(Position.buildPostionFromXYCoords(i, j));
+				
+				if (chessPiece != null &&chessPiece.getColor() == color) {
+					strength += getValueOfPieceAtPosition(board,
 							Position.buildPostionFromXYCoords(i, j));
 
 				}
@@ -26,12 +31,14 @@ class GameLogic {
 		return strength;
 	}
 
-	private double getValueOfPieceAtPosition(AbstractChessPiece[][] pieces,	Position position) {
+	private double getValueOfPieceAtPosition(Board board, Position position) {
 		double value = 0;
 
-		if (pieces[position.getX()][position.getY()] instanceof Pawn) {
+		AbstractChessPiece piece = board.getPieceAtPostion(position);
+		
+		if (piece instanceof Pawn) {
 
-			if (areMultiplePawnsOnColumn(pieces, position)) {
+			if (areMultiplePawnsOnColumn(board, position)) {
 				value = PieceConstants.PAWN_VALUE - .5;
 			} else {
 				value = PieceConstants.PAWN_VALUE;
@@ -39,26 +46,29 @@ class GameLogic {
 
 		} else {
 
-			value = pieces[position.getX()][position.getY()].getValue();
+			value = piece.getValue();
 		}
 
 		return value;
 	}
 
-	private boolean areMultiplePawnsOnColumn(AbstractChessPiece[][] pieces,	Position position) {
+	private boolean areMultiplePawnsOnColumn(Board board,	Position position) {
 		int amtOfPawns = 0;
 		final int COLUMN = position.getX();
 
-		AbstractChessPiece piece = pieces[position.getX()][position.getY()];
+		AbstractChessPiece piece = board.getPieceAtPostion(position);
+		AbstractChessPiece tempPiece;
 
 		for (int y = 0; y < Game.Constants.DEFAULT_BOARD_SIZE; y++) {
 
+			tempPiece = board.getPieceAtPostion(Position.buildPostionFromXYCoords(COLUMN, y));
+			
 			// Continue if it is null
-			if (pieces[COLUMN][y] == null)
+			if (tempPiece == null)
 				continue;
 
-			if (pieces[COLUMN][y] instanceof Pawn
-					&& pieces[COLUMN][y].getColor() == piece.getColor()) {
+			if (tempPiece instanceof Pawn
+					&& tempPiece.getColor() == piece.getColor()) {
 				amtOfPawns++;
 			}
 

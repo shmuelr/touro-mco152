@@ -132,18 +132,7 @@ class Board {
 		return count;
 	}
 
-	public AbstractChessPiece getPiece(char x, int y)
-	{
-		return getPiece(Position.buildPostionFromChessCoords(x, y));
-	}
 	
-	private AbstractChessPiece getPiece(Position position)
-	{
-		return pieces[position.getX()][position.getY()];
-	}
-	
-	
-
 	
 	
 	

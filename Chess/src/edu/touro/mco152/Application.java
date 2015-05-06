@@ -9,7 +9,7 @@ public class Application {
 	public static void main(String[] args) {
 		Game game = Game.buildNewGame();
 		
-		System.out.println("Welcome to the chess game.\n\nYou can move pieces by typing move a3 d4.\nType 's' to dispay the board strength.\nType exit to exit the game.\n\nEnjoy!\n");
+		System.out.println(Game.Constants.GAME_INSTRUCTIONS);
 		System.out.println(game.printBoard());
 		Scanner scanner = new Scanner(System.in);
 		

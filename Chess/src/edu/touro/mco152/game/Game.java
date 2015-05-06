@@ -2,6 +2,8 @@ package edu.touro.mco152.game;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
+import edu.touro.mco152.pieces.PieceColor;
+
 
 public class Game {
 
@@ -21,6 +23,14 @@ public class Game {
 		public static final int MOVE_ERROR_PIECE_IN_DESTINATION = -3;
 		public static final int MOVE_ERROR_INVALID_MOVE = -4;
 		public static final int MOVE_ERROR_INVALID_POSITION = -5;
+		
+		public static final String GAME_INSTRUCTIONS = 
+				"Welcome to the chess game.\n\n"
+				+ "You can move pieces by typing move a3 d4.\n"
+				+ "Type 's' to dispay the board strength.\n"
+				+ "Type exit to exit the game.\n\n"
+				+ "Enjoy!\n";
+		
 		
 	}
 	
@@ -85,6 +95,9 @@ public class Game {
 			break;
 			
 		case "s":
+			
+			message = "Black strength: "+ gameLogic.getBoardStrength(gameBoard, PieceColor.BLACK)+"\n"+
+					"White strength: "+ gameLogic.getBoardStrength(gameBoard, PieceColor.WHITE)+"\n";
 			
 			break;
 			
