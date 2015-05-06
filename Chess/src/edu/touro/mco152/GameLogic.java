@@ -198,7 +198,7 @@ public class GameLogic {
 		return Math.abs(x1 - x2);
 	}
 
-	private boolean existsPieceBetweenTwoPoints(Position p1, Position p2) {
+	public boolean existsPieceBetweenTwoPoints(Position p1, Position p2) {
 		int x1 = p1.getX(), y1 = p1.getY(), x2 = p2.getX(), y2 = p2.getY();
 		if (x1 == x2)
 			for (int i = Math.min(y1, y2) + 1; i < Math.max(y1, y2); i++) {
@@ -210,7 +210,7 @@ public class GameLogic {
 				if (pieces[i][y1] != null)
 					return true;
 			}
-		if (Math.abs(y1 - y2) == Math.abs(x1 - x2)) {
+		if (isDiagonal(p1,p2)) {
 			int[] slopeArray = getSlopeArray(p1, p2);
 			boolean p1IsLower = (y1 < y2);
 			for (int x = x1, y = y1; (p1IsLower) ? y1 < y2 : y1 > y2; x += slopeArray[0], y += slopeArray[1])
@@ -221,7 +221,7 @@ public class GameLogic {
 	}
 
 	// this method returns an array to help iterate diagonal checks.
-	private int[] getSlopeArray(Position p1, Position p2) {
+	public int[] getSlopeArray(Position p1, Position p2) {
 		int[] slopeArray = new int[2];
 		slopeArray[0] = (p1.getX() < p2.getX()) ? 1 : -1;
 		slopeArray[1] = (p1.getY() < p2.getY()) ? 1 : -1;

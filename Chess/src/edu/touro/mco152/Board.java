@@ -152,7 +152,7 @@ public class Board {
 	}
 	
 	// Using XY coordinates is private because the player must use the chess coordinate system
-	private boolean addPieceToBoard(ChessPiece piece, int x, int y)
+	public boolean addPieceToBoard(ChessPiece piece, int x, int y)
 	{
 		if(pieces[x][y] == null){
 			pieces[x][y] = piece;
