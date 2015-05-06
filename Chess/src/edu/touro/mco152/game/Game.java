@@ -96,8 +96,16 @@ public class Game {
 			
 		case "s":
 			
-			message = "Black strength: "+ gameLogic.getBoardStrength(gameBoard, PieceColor.BLACK)+"\n"+
-					"White strength: "+ gameLogic.getBoardStrength(gameBoard, PieceColor.WHITE)+"\n";
+			message = "Black strength: "
+			+ gameLogic.printPieces(gameBoard, PieceColor.BLACK)
+			+ " :"
+			+ gameLogic.getBoardStrength(gameBoard, PieceColor.BLACK)
+			+"\n"
+			+"White strength: "
+			+ gameLogic.printPieces(gameBoard, PieceColor.WHITE)
+			+ " :"
+			+ gameLogic.getBoardStrength(gameBoard, PieceColor.WHITE)
+			+"\n";
 			
 			break;
 			

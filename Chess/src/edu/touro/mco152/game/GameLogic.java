@@ -1,5 +1,7 @@
 package edu.touro.mco152.game;
 
+import java.util.List;
+
 import edu.touro.mco152.game.Game.Constants;
 import edu.touro.mco152.pieces.AbstractChessPiece;
 import edu.touro.mco152.pieces.Knight;
@@ -173,6 +175,18 @@ class GameLogic {
 		private boolean isSquareThreatedBy(PieceColor color, int x, int y){
 			
 			return false;
+		}
+
+		public String printPieces(Board gameBoard, PieceColor color) {
+			List<AbstractChessPiece> list = gameBoard.getListOfPieces(color);
+			
+			StringBuilder stringBuilder = new StringBuilder();
+			
+			for(AbstractChessPiece piece : list){
+				stringBuilder.append(piece.toString());
+			}
+			
+			return stringBuilder.toString();
 		}
 		
 		
