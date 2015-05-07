@@ -11,22 +11,25 @@ public abstract class ChessPiece implements Comparable<ChessPiece>{
 			
 	protected PieceColor color;
 	protected final char pieceChar;	
+	protected double value;
 	
-	public ChessPiece(PieceColor color, char charRepresent){
+	public ChessPiece(PieceColor color, char charRepresent, double value){
 		
 		this.color = color;
 		pieceChar = isWhite() ? 
 				Character.toUpperCase(charRepresent) : 
 					Character.toLowerCase(charRepresent);
+	    this.value = value;
 	}	
 	 
 	
-	public PieceColor getColor()
-	{
+	public PieceColor getColor(){
 		return color;
 	}	
 	
-	public abstract double getValue();
+	public double getValue(){
+		return value;
+	};
 	
 	public boolean isWhite(){
 		return color == PieceColor.WHITE;
