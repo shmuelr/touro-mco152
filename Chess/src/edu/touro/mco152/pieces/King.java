@@ -1,5 +1,8 @@
 package edu.touro.mco152.pieces;
 
+import edu.touro.mco152.BoardUtils;
+import edu.touro.mco152.Position;
+
 public class King extends ChessPiece{
 
 	
@@ -10,5 +13,8 @@ public class King extends ChessPiece{
 		super(color,CHAR_REPRESENTATION,VALUE);
 	}
 	
-	
+	public boolean isValidMove(Position from, Position to){
+		return(BoardUtils.absDistanceBetweenTwoPoints(from.getX(),to.getX())<=1&&
+				BoardUtils.absDistanceBetweenTwoPoints(from.getY(),to.getY())<=1);
+	}
 }

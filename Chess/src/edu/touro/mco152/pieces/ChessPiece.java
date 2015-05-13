@@ -1,5 +1,7 @@
 package edu.touro.mco152.pieces;
 
+import edu.touro.mco152.Position;
+
 
 public abstract class ChessPiece implements Comparable<ChessPiece>{
 	
@@ -22,6 +24,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece>{
 	    this.value = value;
 	}	
 	 
+	public abstract boolean isValidMove(Position from, Position to);
 	
 	public PieceColor getColor(){
 		return color;
