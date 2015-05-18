@@ -51,10 +51,10 @@ public class Game {
         return MOVE_SUCCESS;
 	}
 	
-	private boolean isValidMove(ChessPiece piece, Position to) {		
+	private boolean isValidMove(ChessPiece piece, Position to, Position from) {		
 		
 		
-      return false;
+		return BoardUtils.existsPieceBetweenTwoPoints(to, from, board);
 	}
 	
 		

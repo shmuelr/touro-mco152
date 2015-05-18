@@ -128,6 +128,10 @@ public class Board {
 		return getPiece(Position.buildPostionFromChessCoords(x, y));
 	}
 	
+	public ChessPiece getPiece(int x, int y) {
+		return pieces[x][y];
+	}
+	
 	public ChessPiece getPiece(Position position)
 	{
 		return pieces[position.getX()][position.getY()];
